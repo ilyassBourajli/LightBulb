@@ -28,7 +28,7 @@ const Header = () => {
   const [showLangDropdown, setShowLangDropdown] = useState(false);
 
   return (
-    <header className="w-full fixed top-0 left-0 z-50 bg-white/70 backdrop-blur-md shadow-md border-b border-[#cad0dd] transition-all duration-300">
+    <header className="w-full sticky top-0 left-0 z-50 bg-white/80 backdrop-blur-lg shadow-lg border-b border-[#cad0dd] transition-all duration-300">
       <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-between md:items-center py-4 gap-2 md:gap-0">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#cad0dd]">
@@ -53,7 +53,7 @@ const Header = () => {
               to={item.href}
               className={`px-4 py-2 rounded-lg text-lg font-bold transition-all duration-300 transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary
                 ${isActive(item.href)
-                  ? 'bg-primary text-secondary underline underline-offset-4 border border-primary shadow-sm'
+                  ? 'bg-primary/10 text-primary font-extrabold underline underline-offset-[8px] decoration-4 decoration-yellow-400 border border-yellow-300 shadow-md'
                   : 'text-secondary hover:text-primary hover:underline hover:underline-offset-4 hover:bg-white border border-transparent hover:border-primary'}
               `}
               style={{ animationDelay: `${index * 100}ms` }}
@@ -141,7 +141,7 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`w-full text-center px-4 py-4 rounded-lg text-lg font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary
                     ${isActive(item.href)
-                      ? 'bg-primary text-secondary font-bold underline underline-offset-4 border border-primary shadow-sm'
+                      ? 'bg-primary/10 text-primary font-extrabold underline underline-offset-[8px] decoration-4 decoration-yellow-400 border border-yellow-300 shadow-md'
                       : 'text-secondary hover:text-primary hover:underline hover:underline-offset-4 hover:bg-white border border-transparent hover:border-primary'}
                   `}
                   style={{ animationDelay: `${index * 100}ms` }}
