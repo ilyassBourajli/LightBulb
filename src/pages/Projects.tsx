@@ -163,7 +163,7 @@ const Projects = () => {
           </div>
           <div className="flex flex-col items-center">
             <TrendingUp className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">10+</div>
+            <div className="text-3xl font-bold text-[#333]">20+</div>
             <div className="text-[#7d7d7d] text-base font-semibold">Années d'Expérience</div>
           </div>
           <div className="flex flex-col items-center">

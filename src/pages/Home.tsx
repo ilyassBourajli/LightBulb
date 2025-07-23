@@ -34,7 +34,7 @@ const Home = () => {
 
   const stats = [
     { number: "500+", label: t('home.stats.0'), icon: <Award className="w-6 h-6" /> },
-    { number: "10+", label: t('home.stats.1'), icon: <TrendingUp className="w-6 h-6" /> },
+    { number: "20+", label: t('home.stats.1'), icon: <TrendingUp className="w-6 h-6" /> },
     { number: "100%", label: t('home.stats.2'), icon: <Users className="w-6 h-6" /> },
     { number: "24h", label: t('home.stats.3'), icon: <Clock className="w-6 h-6" /> }
   ];
@@ -70,7 +70,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col items-center">
             <TrendingUp className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">10+</div>
+            <div className="text-3xl font-bold text-[#333]">20+</div>
             <div className="text-[#7d7d7d] text-base font-semibold">Années d'Expérience</div>
           </div>
           <div className="flex flex-col items-center">
@@ -205,31 +205,7 @@ const Home = () => {
       </section>
 
 
-      {/* 5. Testimonials Section */}
-      <section className="w-full py-24 bg-cover bg-center relative" style={{ backgroundImage: `url('/pexels-lamiko-3616745.jpg')` }}>
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-white/80" aria-hidden="true"></div>
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 z-10">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="card card-hover flex flex-col animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)]" style={{ animationDelay: `${index * 100}ms` }}>
-              <div className="flex items-center mb-4">
-                <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4" loading="lazy" />
-                <div>
-                  <div className="font-bold text-[#333]">{testimonial.name}</div>
-                  <div className="text-[#7d7d7d] text-sm">{testimonial.company}</div>
-                </div>
-              </div>
-              <div className="flex mb-2">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current transition-all duration-300 hover:scale-110" />
-                ))}
-              </div>
-              <p className="italic text-[#333]">"{testimonial.text}"</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
+      
       {/* 6. CTA Section (Enhanced) */}
       <section className="w-full py-24 relative flex items-center justify-center min-h-[600px] bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('/public/pexels-kseniachernaya-5691642.jpg')` }}>
         {/* Overlay for contrast */}
@@ -240,7 +216,7 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
               <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1 rounded-full shadow-sm">
                 <CheckCircle className="w-5 h-5 text-blue-500" />
-                10+ ans d'expérience
+                20+ ans d'expérience
               </span>
               <span className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-800 text-sm font-semibold px-4 py-1 rounded-full shadow-sm">
                 ★★★★★ <span>Excellent service !</span>
@@ -258,6 +234,9 @@ const Home = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
               Contactez <span className="font-bold text-yellow-700">LIGHT BULB</span> dès aujourd'hui pour un devis gratuit et personnalisé.<br className="hidden md:block" />
               Notre équipe d'experts est prête à vous accompagner.
+            </p>
+            <p className="text-base md:text-lg text-blue-900 mb-6 max-w-2xl mx-auto leading-relaxed font-semibold">
+              LIGHT BULB intervient partout au Maroc, pour vos projets résidentiels et professionnels.
             </p>
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6 mb-6">
@@ -303,6 +282,26 @@ const Home = () => {
                 Envoyer
               </button>
             </form>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Cities Served Section */}
+      <section className="w-full py-12 bg-white flex items-center justify-center">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Nous intervenons dans toutes les villes du Maroc :</h3>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            {[
+              'Casablanca', 'Rabat', 'Tanger', 'Fès', 'Agadir', 'Nador', 'Ouarzazate', 'Marrakech', 'Oujda', 'Kenitra', 'El Jadida', 'Tétouan', 'Safi', 'Khouribga', '...et plus'
+            ].map(city => (
+              <span
+                key={city}
+                className="inline-flex items-center gap-2 bg-yellow-50 border border-yellow-200 text-yellow-800 font-semibold px-4 py-2 rounded-full shadow-sm text-base md:text-lg transition-all duration-200 cursor-pointer hover:bg-yellow-400 hover:text-white group hover:-translate-y-1"
+              >
+                <svg className="w-5 h-5 text-green-500 transition-transform duration-200 group-hover:scale-125 group-hover:text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                {city}
+              </span>
+            ))}
           </div>
         </div>
       </section>
