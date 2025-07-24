@@ -106,7 +106,7 @@ const Home = () => {
             return (
             <div
               key={index}
-              className="flex flex-col items-center min-h-[260px] bg-white text-secondary border border-yellow-100 outline outline-1 outline-yellow-300 rounded-2xl shadow-md animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)] p-8"
+              className="flex flex-col items-center min-h-[260px] bg-white text-secondary border border-yellow-100 outline outline-1 outline-yellow-300 rounded-2xl shadow-blue-400/40 shadow-lg animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl p-8"
               style={{ animationDelay: `${index * 100}ms` }}>
               <div
                 className={`inline-flex items-center justify-center w-12 h-12 ${iconBg} rounded-xl text-white mb-6 text-2xl shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl`}>
@@ -281,6 +281,21 @@ const Home = () => {
               >
                 Envoyer
               </button>
+              <a
+                href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  const name = (document.querySelector('input[name="name"]') as HTMLInputElement)?.value || '';
+                  const email = (document.querySelector('input[name="email"]') as HTMLInputElement)?.value || '';
+                  const msg = encodeURIComponent(`Bonjour, je souhaite un devis.\nNom: ${name}\nEmail/Téléphone: ${email}`);
+                  window.open(`https://wa.me/212661067491?text=${msg}`, '_blank');
+                }}
+                className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 min-h-[48px]"
+                aria-label="Envoyer via WhatsApp"
+              >
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A12.07 12.07 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.22-1.63A12.07 12.07 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.23-3.48-8.52zM12 22c-1.85 0-3.67-.5-5.24-1.44l-.37-.22-3.69.97.99-3.59-.24-.37A9.94 9.94 0 0 1 2 12C2 6.48 6.48 2 12 2c2.54 0 4.93.99 6.74 2.76A9.94 9.94 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.2-7.6c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.18-.29.28-.48.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.34-.26.27-1 1-.97 2.43.03 1.43 1.03 2.81 1.18 3 .15.19 2.03 3.1 4.93 4.23.69.3 1.23.48 1.65.61.69.22 1.32.19 1.81.12.55-.08 1.65-.67 1.89-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/></svg>
+                WhatsApp
+              </a>
             </form>
           </div>
         </div>

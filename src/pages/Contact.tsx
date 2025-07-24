@@ -52,14 +52,14 @@ const Contact = () => {
       icon: <Phone className="w-6 h-6" />,
       title: t('contact.cards.1.title'),
       details: [t('contact.cards.1.line1'), t('contact.cards.1.line2')],
-      link: "tel:+212523000000",
+      link: "tel:+212661067491",
       color: "from-green-500 to-green-600"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: t('contact.cards.2.title'),
       details: [t('contact.cards.2.line1'), t('contact.cards.2.line2')],
-      link: "mailto:contact@lightbbulb.ma",
+      link: "mailto:Bulb.light.2020@gmail.com",
       color: "from-purple-500 to-purple-600"
     },
     {
@@ -96,7 +96,7 @@ const Contact = () => {
       <section className="w-full py-20 bg-white">
         <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((info, index) => (
-              <div key={index} className="card card-hover flex flex-col items-center animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white text-secondary border-primary" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={index} className="card card-hover flex flex-col items-center justify-center animate-fade-in-up transition-all duration-300 shadow-blue-400/40 shadow-lg hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl bg-white text-secondary border border-yellow-200 outline outline-1 outline-yellow-300 rounded-2xl p-5 min-h-[170px]" style={{ animationDelay: `${index * 100}ms` }}>
                 <div className={`inline-flex items-center justify-center w-16 h-16 bg-primary rounded-xl text-white mb-4`}>
                   {React.cloneElement(info.icon, { className: 'w-8 h-8 text-white' })}
                 </div>
@@ -280,7 +280,7 @@ const Contact = () => {
                   <h3 className="text-2xl font-bold">Service d'Urgence 24h/7j</h3>
                 </div>
                 <p className="mb-6">Panne électrique ? Problème urgent ? Notre équipe intervient rapidement.</p>
-                <a href="tel:+212523000000" className="bg-white text-red-600 border-2 border-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:bg-primary hover:text-red-700 hover:border-primary">
+                <a href="tel:+212661067491" className="bg-white text-red-600 border-2 border-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary hover:bg-primary hover:text-red-700 hover:border-primary">
                   <Phone className="w-5 h-5" />
                   <span>Appeler Maintenant</span>
                 </a>

@@ -28,7 +28,7 @@ const Footer = () => {
             <p className="text-gray-300 max-w-xs leading-relaxed">
               {t('footer.company.more')}
             </p>
-            <a href="tel:+212523000000" className="bg-primary hover:bg-white text-secondary px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            <a href="tel:+212661067491" className="bg-primary hover:bg-white text-secondary px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               <Phone className="w-5 h-5" />
               <span>Appeler Maintenant</span>
             </a>
@@ -91,13 +91,13 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3 group">
                 <Phone className="w-6 h-6 text-primary flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
-                <a href="tel:+212523000000" className="text-gray-300 text-base hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                <a href="tel:+212661067491" className="text-gray-300 text-base hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   {t('footer.contact.phone')}
                 </a>
               </div>
               <div className="flex items-center space-x-3 group">
                 <Mail className="w-6 h-6 text-primary flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
-                <a href="mailto:contact@lightbbulb.ma" className="text-white text-base hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                <a href="mailto:Bulb.light.2020@gmail.com" className="text-white text-base hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   {t('footer.contact.email')}
                 </a>
               </div>

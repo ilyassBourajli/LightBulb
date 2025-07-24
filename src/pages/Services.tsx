@@ -102,7 +102,7 @@ const Services = () => {
           {mainServices.map((service, index) => (
             <div
               key={index}
-              className="card card-hover flex flex-col justify-between min-h-[420px] bg-white text-secondary border-[2px] border-blue-500 rounded-2xl shadow-md animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 p-8 shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)]"
+              className="card card-hover flex flex-col justify-between min-h-[420px] bg-white text-secondary border-[2px] border-blue-500 rounded-2xl shadow-blue-400/40 shadow-lg animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl p-8"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div>
@@ -137,7 +137,7 @@ const Services = () => {
           {additionalServices.map((service, index) => (
             <div
             key={index}
-            className="bg-white border border-primary rounded-xl p-6 shadow-md flex items-center gap-3 animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)] shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)]"
+            className="bg-white border border-primary rounded-xl p-6 shadow-blue-400/40 shadow-lg flex items-center gap-3 animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <CheckCircle className="w-8 h-8 text-primary" />
@@ -165,7 +165,7 @@ const Services = () => {
           ].map((process, index) => (
             <div
             key={index}
-            className="bg-white border border-primary rounded-2xl p-8 shadow-md flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)] shadow-[0_10px_15px_-3px_rgba(59,130,246,0.3),0_4px_6px_-2px_rgba(59,130,246,0.2)]"
+            className="bg-white border border-primary rounded-2xl p-8 shadow-blue-400/40 shadow-lg flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl"
             >
               <div className="w-16 h-16 bg-primary text-secondary rounded-full flex items-center justify-center text-xl font-bold mb-4">
                {process.step}
