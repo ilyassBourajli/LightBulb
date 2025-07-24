@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Zap, 
@@ -11,6 +11,15 @@ import {
   Phone
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const heroImages = [
+  { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
+  { src: '/arm.jpg', caption: 'Installation professionnelle' },
+  { src: '/pexels-kseniachernaya-5691642.jpg', caption: 'Matériel de qualité' },
+  { src: '/pexels-lamiko-3616745.jpg', caption: 'Solutions innovantes' },
+  { src: '/prise entrer.jpg', caption: 'Prises sécurisées' },
+  { src: '/prise.jpg', caption: 'Finitions impeccables' },
+];
 
 const Services = () => {
   const { t } = useTranslation();
@@ -81,16 +90,92 @@ const Services = () => {
     "Service après-vente réactif"
   ];
 
+  // Carousel logic (same as Home/About)
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [fade, setFade] = useState(true);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  const triggerFade = (nextIndex: number) => {
+    setFade(false);
+    setTimeout(() => {
+      setPrevIndex(heroIndex);
+      setHeroIndex(nextIndex);
+      setFade(true);
+    }, 300);
+  };
+
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      triggerFade((heroIndex + 1) % heroImages.length);
+    }, 5000);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [heroIndex]);
+
+  const goToPrev = () => triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
+  const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
+
   return (
-    <div className="section-padding spacing-professional">
-      {/* Hero Section */}
-      <section className="w-full min-h-[60vh] bg-cover bg-center relative flex items-center justify-center section-padding" style={{ backgroundImage: `url('/pexels-lamiko-3616745.jpg')` }}>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true"></div>
-        <div className="relative w-full text-center z-10 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-responsive font-bold text-white mb-4">Nos <span className="text-primary">Services</span></h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8 text-professional">De la vente de matériel électrique aux travaux d'installation et de maintenance, LIGHT BULB vous accompagne dans tous vos projets électriques.</p>
-          <Link to="/contact" className="btn-primary">Demander un Devis</Link>
+    <div>
+      {/* Hero Section with Carousel */}
+      <section className="w-full min-h-[60vh] bg-cover bg-center relative flex items-center justify-center transition-all duration-700" >
+        {/* Crossfade Background Images */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className={`absolute inset-0 transition-all duration-700 ${fade ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+            style={{ backgroundImage: `url('${heroImages[heroIndex].src}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            aria-hidden="true"
+          />
+          {heroIndex !== prevIndex && (
+            <div
+              className={`absolute inset-0 transition-all duration-700 opacity-0 scale-100`}
+              style={{ backgroundImage: `url('${heroImages[prevIndex].src}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              aria-hidden="true"
+            />
+          )}
+        </div>
+        {/* Top dark overlay for text readability */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/40 to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div className="relative w-full text-center z-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-4">
+          <h1 className="text-responsive font-black mb-2 bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in-up">
+            Nos <span className="text-white bg-none">Services</span>
+          </h1>
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-2 text-professional leading-relaxed lg:bg-black/30 lg:rounded-xl lg:px-6 lg:py-3 lg:backdrop-blur-md animate-fade-in-up">
+            De la vente de matériel électrique aux travaux d'installation et de maintenance, LIGHT BULB vous accompagne dans tous vos projets électriques.
+          </p>
+          {/* Caption and Button Grouped */}
+          {heroImages[heroIndex].caption && (
+            <div className="flex flex-col items-center gap-2 mt-2 mb-4">
+              <div className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-700 bg-clip-text text-transparent drop-shadow-xl animate-scale-in">
+                {heroImages[heroIndex].caption}
+              </div>
+              <Link to="/contact" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white px-8 py-4 rounded-xl font-extrabold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 animate-fade-in-up mt-2">
+                Demander un Devis
+              </Link>
+            </div>
+          )}
+          {/* Carousel Controls and Dots remain unchanged */}
+          <div className="absolute left-0 right-0 flex justify-between items-center px-4 top-1/2 -translate-y-1/2 pointer-events-none select-none">
+            <button onClick={goToPrev} aria-label="Image précédente" className="pointer-events-auto bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button onClick={goToNext} aria-label="Image suivante" className="pointer-events-auto bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-10 mb-2">
+            {heroImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => triggerFade(idx)}
+                aria-label={`Aller à l'image ${idx + 1}`}
+                className={`w-3 h-3 rounded-full transition-all duration-200 border-2 ${heroIndex === idx ? 'bg-yellow-400 border-yellow-400' : 'bg-white/60 border-white/60'} focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 

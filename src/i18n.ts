@@ -19,7 +19,7 @@ const resources = {
             2: 'de matériel électrique',
             3: 'TRAVAUX DIVERS',
           },
-          more: "Plus de 10 ans d'expertise au service de votre satisfaction"
+          more: "Plus de 20 ans d'expertise au service de votre satisfaction"
         },
         stats: {
           0: 'Projets Réalisés',
@@ -217,7 +217,7 @@ const resources = {
           1: 'VENTE & DISTRIBUTION',
           2: 'de matériel électrique',
           3: 'TRAVAUX DIVERS',
-          more: "Plus de 10 ans d'expertise au service de votre satisfaction"
+          more: "Plus de 20 ans d'expertise au service de votre satisfaction"
         },
         links: {
           title: 'Liens Rapides'

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Zap, Shield, Clock, Users, CheckCircle, Star, Award, TrendingUp } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
+
+const heroImages = [
+  { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
+  { src: '/arm.jpg', caption: 'Installation professionnelle' },
+  { src: '/pexels-kseniachernaya-5691642.jpg', caption: 'Matériel de qualité' },
+  { src: '/pexels-lamiko-3616745.jpg', caption: 'Solutions innovantes' },
+  { src: '/prise entrer.jpg', caption: 'Prises sécurisées' },
+  { src: '/prise.jpg', caption: 'Finitions impeccables' },
+];
 
 const Home = () => {
   const { t } = useTranslation();
@@ -39,23 +48,100 @@ const Home = () => {
     { number: "24h", label: t('home.stats.3'), icon: <Clock className="w-6 h-6" /> }
   ];
 
+  const [heroIndex, setHeroIndex] = useState(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [fade, setFade] = useState(true);
+  // Add a ref for the background image
+  const bgRef = useRef<HTMLDivElement>(null);
+  // Instead of a single background image div, render both the current and previous image, and crossfade them.
+  const [prevIndex, setPrevIndex] = useState(0);
+
+  const triggerFade = (nextIndex: number) => {
+    setFade(false);
+    setTimeout(() => {
+      setPrevIndex(heroIndex);
+      setHeroIndex(nextIndex);
+      setFade(true);
+    }, 300);
+  };
+
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      triggerFade((heroIndex + 1) % heroImages.length);
+    }, 5000);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [heroIndex]);
+
+  const goToPrev = () => triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
+  const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
+
   // --- Render ---
   return (
-    <div className="section-padding spacing-professional">
+    <div>
       {/* 1. Hero Section */}
-      <section className="w-full min-h-[80vh] bg-cover bg-center relative flex items-center justify-center section-padding" style={{ backgroundImage: `url('/pexels-kseniachernaya-5691642.jpg')` }}>
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60" aria-hidden="true"></div>
-        <div className="relative w-full flex flex-col items-center justify-center gap-8 z-10 px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-responsive font-bold leading-tight mb-4 text-white">
-            Votre Expert en <span className="text-primary">Électricité</span> au Maroc
+      <section className="w-full min-h-[60vh] bg-cover bg-center relative flex items-center justify-center transition-all duration-700" >
+        {/* Crossfade Background Images */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className={`absolute inset-0 transition-all duration-700 ${fade ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+            style={{ backgroundImage: `url('${heroImages[heroIndex].src}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            aria-hidden="true"
+          />
+          {heroIndex !== prevIndex && (
+            <div
+              className={`absolute inset-0 transition-all duration-700 opacity-0 scale-100`}
+              style={{ backgroundImage: `url('${heroImages[prevIndex].src}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              aria-hidden="true"
+            />
+          )}
+        </div>
+        {/* Top dark overlay for text readability */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/40 to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div className="relative w-full flex flex-col items-center justify-center gap-4 z-20 px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-responsive font-black mb-2 bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in-up">
+            Solutions <span className="text-white bg-none">Électriques Professionnelles</span>
           </h1>
-          <p className="text-xl text-primary/90 text-professional mb-6">
-            LIGHT BULB vous accompagne dans tous vos projets électriques partout au Maroc : vente de matériel, installation, maintenance et dépannage.
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-2 text-professional leading-relaxed lg:bg-black/30 lg:rounded-xl lg:px-6 lg:py-3 lg:backdrop-blur-md animate-fade-in-up">
+            Pour Résidences et Entreprises : sécurité, innovation et expertise à votre service.
           </p>
-          <div className="btn-group-professional justify-center">
-            <Link to="/contact" className="btn-primary inline-flex items-center justify-center group animate-fade-in-up">Demander un Devis <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" /></Link>
-            <Link to="/services" className="btn-secondary inline-flex items-center justify-center group animate-fade-in-up">Nos Services <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" /></Link>
+          {/* Caption and Button Grouped */}
+          {heroImages[heroIndex].caption && (
+            <div className="flex flex-col items-center gap-2 mt-2 mb-4">
+              <div className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-700 bg-clip-text text-transparent drop-shadow-xl animate-scale-in">
+                {heroImages[heroIndex].caption}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
+                <Link to="/contact" className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white px-8 py-4 rounded-xl font-extrabold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 animate-fade-in-up flex items-center gap-2">
+                  Demander un devis
+                  <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" style={{ verticalAlign: 'middle' }} />
+                </Link>
+                <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-white via-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-400 text-yellow-700 px-8 py-4 rounded-xl font-extrabold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 animate-fade-in-up flex items-center gap-2">
+                  Nos services
+                  <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" style={{ verticalAlign: 'middle' }} />
+                </Link>
+              </div>
+            </div>
+          )}
+          {/* Carousel Controls */}
+          <div className="absolute left-0 right-0 flex justify-between items-center px-4 top-1/2 -translate-y-1/2 pointer-events-none select-none">
+            <button onClick={goToPrev} aria-label="Image précédente" className="pointer-events-auto bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button onClick={goToNext} aria-label="Image suivante" className="pointer-events-auto bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400">
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
+          {/* Dots - move below main content */}
+          <div className="flex justify-center gap-2 mt-10 mb-2">
+            {heroImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => triggerFade(idx)}
+                aria-label={`Aller à l'image ${idx + 1}`}
+                className={`w-3 h-3 rounded-full transition-all duration-200 border-2 ${heroIndex === idx ? 'bg-yellow-400 border-yellow-400' : 'bg-white/60 border-white/60'} focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400`}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -129,11 +215,11 @@ const Home = () => {
       </section>
 
       {/* 4. Why Choose Us Section */}
-      
+
       <section className="py-24 bg-white w-full">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-      
+
             {/* 4.1 Left Column */}
             <div className="space-y-10 animate-fade-in-left">
               <div>
@@ -200,18 +286,18 @@ const Home = () => {
                 <p className="text-sm text-gray-500">Note moyenne de nos clients</p>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </section>
 
 
-      
+
       {/* 6. CTA Section (Enhanced) */}
       <section className="w-full py-24 relative flex items-center justify-center min-h-[600px] bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('/public/pexels-kseniachernaya-5691642.jpg')` }}>
         {/* Overlay for contrast */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-transparent pointer-events-none" aria-hidden="true"></div>
-        <div className="relative z-10 w-full max-w-3xl mx-auto">
-          <div className="bg-gradient-to-br from-yellow-100 via-yellow-50 to-yellow-200 rounded-3xl p-10 md:p-14 text-center text-[#000] shadow-[0_12px_48px_0_rgba(59,130,246,0.25),0_2px_8px_0_rgba(0,0,0,0.10)] transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-300 animate-fade-in-up">
+        <div className="relative z-10 w-full max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-yellow-100 via-yellow-50 to-yellow-200 rounded-3xl p-10 md:p-16 text-center text-[#000] shadow-[0_16px_64px_0_rgba(59,130,246,0.25),0_4px_16px_0_rgba(0,0,0,0.10)] transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-300 animate-fade-in-up">
             {/* Trust Badge & Testimonial */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
               <span className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1 rounded-full shadow-sm">

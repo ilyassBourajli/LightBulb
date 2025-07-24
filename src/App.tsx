@@ -9,6 +9,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
+import PlanSite from './pages/PlanSite';
 
 // Loading component
 const LoadingSpinner = () => (
@@ -38,6 +39,7 @@ function App() {
               <Route path="/realisations" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/mentions-legales" element={<Legal />} />
+              <Route path="/plan-du-site" element={<PlanSite />} />
             </Routes>
           </Suspense>
         </main>
