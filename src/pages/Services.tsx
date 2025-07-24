@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Zap, 
@@ -7,10 +7,8 @@ import {
   Shield, 
   Clock, 
   CheckCircle,
-  ArrowRight,
-  Phone
+  ArrowRight
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -22,7 +20,6 @@ const heroImages = [
 ];
 
 const Services = () => {
-  const { t } = useTranslation();
   const mainServices = [
     {
       icon: <ShoppingCart className="w-12 h-12" />,
@@ -95,16 +92,15 @@ const Services = () => {
   const [prevIndex, setPrevIndex] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [fade, setFade] = useState(true);
-  const bgRef = useRef<HTMLDivElement>(null);
 
-  const triggerFade = (nextIndex: number) => {
+  const triggerFade = useCallback((nextIndex: number) => {
     setFade(false);
     setTimeout(() => {
       setPrevIndex(heroIndex);
       setHeroIndex(nextIndex);
       setFade(true);
     }, 300);
-  };
+  }, [heroIndex]);
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -112,7 +108,7 @@ const Services = () => {
       triggerFade((heroIndex + 1) % heroImages.length);
     }, 5000);
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-  }, [heroIndex]);
+  }, [heroIndex, triggerFade]);
 
   const goToPrev = () => triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
   const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);

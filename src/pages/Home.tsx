@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, Shield, Clock, Users, CheckCircle, Star, Award, TrendingUp } from 'lucide-react';
-import { useTranslation, Trans } from 'react-i18next';
+import { ArrowRight, Zap, Shield, Clock, Users, CheckCircle, Award, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -28,42 +28,20 @@ const Home = () => {
     }
   ];
 
-  const features = [
-    t('home.features.0'), t('home.features.1'), t('home.features.2'), t('home.features.3'), t('home.features.4'), t('home.features.5'),
-  ];
-
-  const testimonials = [
-    {
-      name: t('home.testimonials.0.name'), company: t('home.testimonials.0.company'), text: t('home.testimonials.0.text'), rating: 5, avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-    },
-    {
-      name: t('home.testimonials.1.name'), company: t('home.testimonials.1.company'), text: t('home.testimonials.1.text'), rating: 5, avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
-    }
-  ];
-
-  const stats = [
-    { number: "500+", label: t('home.stats.0'), icon: <Award className="w-6 h-6" /> },
-    { number: "20+", label: t('home.stats.1'), icon: <TrendingUp className="w-6 h-6" /> },
-    { number: "100%", label: t('home.stats.2'), icon: <Users className="w-6 h-6" /> },
-    { number: "24h", label: t('home.stats.3'), icon: <Clock className="w-6 h-6" /> }
-  ];
-
   const [heroIndex, setHeroIndex] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [fade, setFade] = useState(true);
-  // Add a ref for the background image
-  const bgRef = useRef<HTMLDivElement>(null);
   // Instead of a single background image div, render both the current and previous image, and crossfade them.
   const [prevIndex, setPrevIndex] = useState(0);
 
-  const triggerFade = (nextIndex: number) => {
+  const triggerFade = useCallback((nextIndex: number) => {
     setFade(false);
     setTimeout(() => {
       setPrevIndex(heroIndex);
       setHeroIndex(nextIndex);
       setFade(true);
     }, 300);
-  };
+  }, [heroIndex]);
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -71,7 +49,7 @@ const Home = () => {
       triggerFade((heroIndex + 1) % heroImages.length);
     }, 5000);
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-  }, [heroIndex]);
+  }, [heroIndex, triggerFade]);
 
   const goToPrev = () => triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
   const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
@@ -314,7 +292,7 @@ const Home = () => {
             {/* Quick Benefits */}
             <ul className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 text-base font-medium text-gray-800">
               <li className="flex items-center gap-2"><span className="text-green-500">✅</span> Devis 100% gratuit</li>
-              <li className="flex items-center gap-2"><span className="text-green-500">✅</span> Intervention sous 24 h</li>
+              <li className="flex items-center gap-2"><span className="text-green-500">✅</span> Intervention sous 24h</li>
               <li className="flex items-center gap-2"><span className="text-green-500">✅</span> Équipe certifiée & agréée</li>
             </ul>
             <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">

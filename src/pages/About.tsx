@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Award, Users, Clock, Target } from 'lucide-react';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const heroImages = [
@@ -42,16 +42,15 @@ const About = () => {
   const [prevIndex, setPrevIndex] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [fade, setFade] = useState(true);
-  const bgRef = useRef<HTMLDivElement>(null);
 
-  const triggerFade = (nextIndex: number) => {
+  const triggerFade = useCallback((nextIndex: number) => {
     setFade(false);
     setTimeout(() => {
       setPrevIndex(heroIndex);
       setHeroIndex(nextIndex);
       setFade(true);
     }, 300);
-  };
+  }, [heroIndex]);
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -59,7 +58,7 @@ const About = () => {
       triggerFade((heroIndex + 1) % heroImages.length);
     }, 5000);
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-  }, [heroIndex]);
+  }, [heroIndex, triggerFade]);
 
   const goToPrev = () => triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
   const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
