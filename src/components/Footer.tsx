@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Facebook, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const [showTop, setShowTop] = useState(false);
@@ -59,14 +60,14 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm">
               <li>
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact#devis"
                   className="text-gray-600 hover:text-yellow-600 transition-all duration-200 hover:translate-x-1 inline-block group"
                 >
                   <span className="border-b border-transparent group-hover:border-yellow-600 transition-colors duration-200">
                     Nous contacter
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -118,14 +119,14 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm">
               <li>
-                <a
-                  href="/plan-du-site"
+                <Link
+                  to="/plan-du-site"
                   className="text-gray-600 hover:text-yellow-600 transition-all duration-200 hover:translate-x-1 inline-block group"
                 >
                   <span className="border-b border-transparent group-hover:border-yellow-600 transition-colors duration-200">
                     Plan du site
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -138,14 +139,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="/mentions-legales"
+                <Link
+                  to="/mentions-legales"
                   className="text-gray-600 hover:text-yellow-600 transition-all duration-200 hover:translate-x-1 inline-block group"
                 >
                   <span className="border-b border-transparent group-hover:border-yellow-600 transition-colors duration-200">
                     Mentions légales
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -200,6 +201,8 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://www.instagram.com/bulb7677?igsh=MXNkbTFwaml1c3FvOA%3D%3D&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group bg-white hover:bg-pink-50 p-3 rounded-xl shadow-sm hover:shadow-md border border-gray-200 hover:border-pink-200 transition-all duration-200 hover:scale-110"
                   aria-label="Instagram"
                 >
@@ -212,7 +215,9 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/light-bulb-741a9833b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app "
+                  href="https://www.linkedin.com/in/light-bulb-741a9833b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group bg-white hover:bg-blue-50 p-3 rounded-xl shadow-sm hover:shadow-md border border-gray-200 hover:border-blue-200 transition-all duration-200 hover:scale-110"
                   aria-label="LinkedIn"
                 >
@@ -220,6 +225,8 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://www.tiktok.com/@light20bulb?_t=ZM-8yJ0bgD9ZWo&_r=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group bg-white hover:bg-gray-50 p-3 rounded-xl shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300 transition-all duration-200 hover:scale-110"
                   aria-label="TikTok"
                 >
@@ -243,7 +250,7 @@ const Footer = () => {
             <span>© Light Bulb 2024 - Tous droits réservés</span>
           </div>
           <div className="flex items-center gap-6 text-gray-500">
-            <span className="text-xs">Fait avec ❤️ en maroc</span>
+            <span className="text-xs">Fait avec ❤️ au Maroc</span>
           </div>
         </div>
       </div>

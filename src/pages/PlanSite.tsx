@@ -15,22 +15,22 @@ const PlanSite = () => (
         </Link>
       </li>
       <li>
-        <Link to="/a-propos" className="text-blue-700 hover:underline">
+        <Link to="/a-propos#about" className="text-blue-700 hover:underline">
           À propos
         </Link>
       </li>
       <li>
-        <Link to="/services" className="text-blue-700 hover:underline">
+        <Link to="/services#services" className="text-blue-700 hover:underline">
           Services
         </Link>
       </li>
       <li>
-        <Link to="/realisations" className="text-blue-700 hover:underline">
+        <Link to="/realisations#projects" className="text-blue-700 hover:underline">
           Réalisations
         </Link>
       </li>
       <li>
-        <Link to="/contact" className="text-blue-700 hover:underline">
+        <Link to="/contact#devis" className="text-blue-700 hover:underline">
           Contact
         </Link>
       </li>

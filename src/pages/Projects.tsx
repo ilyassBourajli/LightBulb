@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
-  Calendar,
-  MapPin,
-  User,
-  Award,
-  TrendingUp,
-  Users,
-  Clock,
   ArrowRight,
+  CheckCircle,
+  Clock,
+  Users,
+  Award,
+  X,
+  MapPin,
+  Calendar,
+  DollarSign,
+  Star,
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom'; // Added Link import
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -18,129 +19,135 @@ const heroImages = [
   { src: '/pexels-kseniachernaya-5691642.jpg', caption: 'Matériel de qualité' },
   { src: '/pexels-lamiko-3616745.jpg', caption: 'Solutions innovantes' },
   { src: '/prise entrer.jpg', caption: 'Prises sécurisées' },
-  { src: '/prise.jpg', caption: 'Finitions impeccables' },
+  { src: '/Card.jpg', caption: 'Finitions impeccables' },
 ];
 
+interface Project {
+  title: string;
+  category: string;
+  description: string;
+  features: string[];
+  duration: string;
+  client: string;
+  image: string;
+  location?: string;
+  budget?: string;
+  rating?: number;
+  completionDate?: string;
+  teamSize?: string;
+  challenges?: string[];
+  solutions?: string[];
+  testimonials?: string;
+}
+
 const Projects = () => {
-  const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const categories = [
-    { id: 'all', name: t('projects.all_projects') },
-    { id: 'residential', name: t('projects.residential') },
-    { id: 'commercial', name: t('projects.commercial') },
-    { id: 'industrial', name: t('projects.industrial') },
-  ];
-
-  const projects = [
+  const projects: Project[] = [
     {
-      id: 1,
-      title: t('projects.project_1_title'),
-      category: 'residential',
-      location: 'Maroc',
-      client: 'Famille Benali',
-      date: 'Mars 2024',
-      description: t('projects.project_1_description'),
-      image:
-        'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Tableau électrique moderne',
-        'Éclairage LED',
-        'Système domotique',
-        'Prises USB intégrées',
-      ],
+      title: 'Installation Électrique Résidentielle',
+      category: 'Résidentiel',
+      description: 'Installation complète d\'un système électrique pour une villa moderne à Casablanca.',
+      features: ['Tableau électrique principal', 'Éclairage LED', 'Prises sécurisées', 'Mise à la terre'],
+      duration: '3 semaines',
+      client: 'Villa Al Mansour',
+      image: '/Card.jpg',
+      location: 'Casablanca, Maroc',
+      budget: '45,000 MAD',
+      rating: 5,
+      completionDate: 'Mars 2024',
+      teamSize: '4 électriciens',
+      challenges: ['Intégration avec l\'architecture existante', 'Respect des normes de sécurité'],
+      solutions: ['Planification détaillée avec l\'architecte', 'Utilisation de matériaux certifiés'],
+      testimonials: '"Une installation parfaite, dans les délais et le budget. Équipe très professionnelle."'
     },
     {
-      id: 2,
-      title: t('projects.project_2_title'),
-      category: 'commercial',
-      location: 'Mohammedia Centre',
-      client: 'Restaurant Casa Marina',
-      date: 'Février 2024',
-      description: t('projects.project_2_description'),
-      image:
-        'https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Mise aux normes',
-        'Éclairage professionnel',
-        'Circuits spécialisés',
-        'Sécurité renforcée',
-      ],
+      title: 'Système Électrique Commercial',
+      category: 'Commercial',
+      description: 'Mise en place d\'un système électrique pour un centre commercial à Rabat.',
+      features: ['Tableaux de distribution', 'Éclairage commercial', 'Système de sécurité', 'Automatisation'],
+      duration: '6 semaines',
+      client: 'Centre Commercial Al Madina',
+      image: '/Card.jpg',
+      location: 'Rabat, Maroc',
+      budget: '120,000 MAD',
+      rating: 5,
+      completionDate: 'Février 2024',
+      teamSize: '6 électriciens',
+      challenges: ['Gestion de la complexité du projet', 'Coordination avec plusieurs corps de métier'],
+      solutions: ['Planning rigoureux', 'Communication quotidienne avec le client'],
+      testimonials: '"Projet complexe mené à bien avec brio. Excellente coordination d\'équipe."'
     },
     {
-      id: 3,
-      title: t('projects.project_3_title'),
-      category: 'industrial',
-      location: 'Zone Industrielle Mohammedia',
-      client: 'Société ATLAS',
-      date: 'Janvier 2024',
-      description: t('projects.project_3_description'),
-      image:
-        'https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Tableaux industriels',
-        'Éclairage haute performance',
-        'Circuits de puissance',
-        'Maintenance préventive',
-      ],
+      title: 'Rénovation Électrique Industrielle',
+      category: 'Industriel',
+      description: 'Modernisation complète de l\'installation électrique d\'une usine à Tanger.',
+      features: ['Mise aux normes', 'Nouveaux tableaux', 'Câblage industriel', 'Protection renforcée'],
+      duration: '8 semaines',
+      client: 'Usine Textile Atlas',
+      image: '/Card.jpg',
+      location: 'Tanger, Maroc',
+      budget: '280,000 MAD',
+      rating: 5,
+      completionDate: 'Janvier 2024',
+      teamSize: '8 électriciens',
+      challenges: ['Travail en milieu industriel', 'Minimisation des arrêts de production'],
+      solutions: ['Travail en équipes décalées', 'Planification minutieuse'],
+      testimonials: '"Rénovation réussie sans interruption majeure de la production. Excellent travail."'
     },
     {
-      id: 4,
-      title: t('projects.project_4_title'),
-      category: 'commercial',
-      location: 'Casablanca',
-      client: 'Entreprise TechCorp',
-      date: 'Décembre 2023',
-      description: t('projects.project_4_description'),
-      image:
-        'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Bureaux connectés',
-        'Éclairage intelligent',
-        'Prises modulaires',
-        'Câblage réseau',
-      ],
+      title: 'Installation Domotique',
+      category: 'Domotique',
+      description: 'Système domotique complet pour une résidence de luxe à Marrakech.',
+      features: ['Contrôle centralisé', 'Éclairage intelligent', 'Sécurité automatisée', 'Interface mobile'],
+      duration: '4 semaines',
+      client: 'Résidence Palm Grove',
+      image: '/Card.jpg',
+      location: 'Marrakech, Maroc',
+      budget: '85,000 MAD',
+      rating: 5,
+      completionDate: 'Décembre 2023',
+      teamSize: '3 spécialistes domotique',
+      challenges: ['Intégration de technologies avancées', 'Formation du personnel'],
+      solutions: ['Technologies de pointe', 'Formation complète incluse'],
+      testimonials: '"Système domotique exceptionnel. La technologie au service du confort."'
     },
     {
-      id: 5,
-      title: t('projects.project_5_title'),
-      category: 'residential',
-      location: 'Maroc',
-      client: 'M. et Mme Alaoui',
-      date: 'Novembre 2023',
-      description: t('projects.project_5_description'),
-      image:
-        'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Contrôle intelligent',
-        "Éclairage d'ambiance",
-        'Prises design',
-        'Sécurité intégrée',
-      ],
+      title: 'Éclairage Public LED',
+      category: 'Public',
+      description: 'Installation d\'éclairage LED pour les rues principales de Mohammedia.',
+      features: ['Éclairage LED haute efficacité', 'Contrôle à distance', 'Économies d\'énergie', 'Maintenance réduite'],
+      duration: '5 semaines',
+      client: 'Municipalité de Mohammedia',
+      image: '/Card.jpg',
+      location: 'Mohammedia, Maroc',
+      budget: '350,000 MAD',
+      rating: 5,
+      completionDate: 'Novembre 2023',
+      teamSize: '5 électriciens',
+      challenges: ['Travail en milieu urbain', 'Coordination avec les services municipaux'],
+      solutions: ['Planning nocturne', 'Communication avec les autorités'],
+      testimonials: '"Éclairage moderne et économique. Les citoyens sont satisfaits."'
     },
     {
-      id: 6,
-      title: t('projects.project_6_title'),
-      category: 'commercial',
-      location: 'Mohammedia',
-      client: 'Galerie Commerciale',
-      date: 'Octobre 2023',
-      description: t('projects.project_6_description'),
-      image:
-        'https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg?auto=compress&cs=tinysrgb&w=800',
-      features: [
-        'Éclairage commercial',
-        'Systèmes de sécurité',
-        'Distribution électrique',
-        "Éclairage d'urgence",
-      ],
+      title: 'Système de Sécurité Électrique',
+      category: 'Sécurité',
+      description: 'Installation d\'un système de sécurité électrique pour une banque à Agadir.',
+      features: ['Système d\'alarme', 'Caméras de surveillance', 'Contrôle d\'accès', 'Monitoring 24/7'],
+      duration: '3 semaines',
+      client: 'Banque Populaire',
+      image: '/Card.jpg',
+      location: 'Agadir, Maroc',
+      budget: '95,000 MAD',
+      rating: 5,
+      completionDate: 'Octobre 2023',
+      teamSize: '4 spécialistes sécurité',
+      challenges: ['Sécurité renforcée', 'Conformité bancaire'],
+      solutions: ['Technologies de sécurité avancées', 'Certification des installations'],
+      testimonials: '"Système de sécurité fiable et professionnel. Conformité parfaite."'
     },
   ];
-
-  const filteredProjects =
-    selectedCategory === 'all'
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
 
   // Carousel logic (same as Home/About)
   const [heroIndex, setHeroIndex] = useState(0);
@@ -155,7 +162,7 @@ const Projects = () => {
         setPrevIndex(heroIndex);
         setHeroIndex(nextIndex);
         setFade(true);
-      }, 300);
+      }, 250); // Réduit à 250ms pour une transition plus rapide
     },
     [heroIndex]
   );
@@ -164,7 +171,7 @@ const Projects = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       triggerFade((heroIndex + 1) % heroImages.length);
-    }, 5000);
+    }, 6000); // Augmenté de 5000ms à 6000ms pour plus de temps de lecture
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
@@ -174,254 +181,491 @@ const Projects = () => {
     triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
   const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
 
+  const location = useLocation();
+
+  // Modal functions
+  const openProjectModal = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+    document.body.style.overflow = 'unset';
+  };
+
+  // Handle escape key for modal
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        closeProjectModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isModalOpen]);
+
+  // Scroll to projects section when hash is present
+  useEffect(() => {
+    if (location.hash === '#projects') {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        setTimeout(() => {
+          projectsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
+
+  // Animation effect for projects section
+  useEffect(() => {
+    const targetElement = document.getElementById('projects');
+    if (targetElement && location.hash === '#projects') {
+      // Add initial animation classes
+      targetElement.classList.add('animate-slide-down');
+      
+      // Add staggered animation to project cards
+      const projectCards = targetElement.querySelectorAll('.project-card');
+      projectCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('animate-fade-in-up');
+        }, 200 + (index * 150));
+      });
+    }
+  }, [location.hash]);
+
   return (
-    <div>
-      {/* Hero Section with Carousel */}
-      <section className="w-full min-h-[60vh] bg-cover bg-center relative flex items-center justify-center transition-all duration-700">
-        {/* Crossfade Background Images */}
+    <div className="w-full">
+      {/* Hero Section */}
+      <section className="w-full h-[70vh] min-h-[600px] bg-cover bg-center relative flex items-center justify-center transition-all duration-700 overflow-hidden">
+        {/* Simple Crossfade Background Images */}
         <div className="absolute inset-0 z-0">
+          {/* Current Image */}
           <div
-            className={`absolute inset-0 transition-all duration-700 ${
-              fade ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+            className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+              fade ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
               backgroundImage: `url('${heroImages[heroIndex].src}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
             }}
             aria-hidden="true"
           />
+          {/* Previous Image for simple crossfade */}
           {heroIndex !== prevIndex && (
             <div
-              className={`absolute inset-0 transition-all duration-700 opacity-0 scale-100`}
+              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                fade ? 'opacity-0' : 'opacity-100'
+              }`}
               style={{
                 backgroundImage: `url('${heroImages[prevIndex].src}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
               }}
               aria-hidden="true"
             />
           )}
         </div>
-        {/* Top dark overlay for text readability */}
-        <div
-          className="absolute inset-0 z-10 hero-overlay pointer-events-none"
-          aria-hidden="true"
-        ></div>
-        <div className="relative w-full flex flex-col items-center justify-center gap-6 z-20 responsive-padding text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 bg-clip-text text-transparent drop-shadow-xl animate-fade-in-up tracking-wide">
-            Nos <span className="ml-2 font-extrabold text-white drop-shadow-md">Réalisations</span>
-          </h1>
-          <p className="text-body-large text-white/95 max-w-4xl mx-auto mb-4 leading-relaxed lg:bg-black/20 lg:rounded-2xl lg:px-8 lg:py-4 lg:backdrop-blur-professional animate-fade-in-up text-shadow">
-            Découvrez quelques-uns de nos projets récents qui témoignent de notre expertise et de la qualité de nos installations électriques.
-          </p>
-          {heroImages[heroIndex].caption && (
-            <div className="flex flex-col items-center gap-4 mt-4 mb-6">
-              <div className="heading-tertiary bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-700 bg-clip-text text-transparent text-shadow-lg animate-scale-in animate-float">
-                {heroImages[heroIndex].caption}
-              </div>
-              <div className="btn-group-professional mt-4">
-                <Link
-                  to="/contact"
-                  className="btn-primary animate-fade-in-up flex items-center gap-2 animate-pulse-glow"
-                >
-                  Demander un devis
-                  <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" style={{ verticalAlign: 'middle' }} />
-                </Link>
-              </div>
-            </div>
-          )}
-          <div className="absolute left-0 right-0 flex justify-between items-center px-4 top-1/2 -translate-y-1/2 pointer-events-none select-none">
-            <button
-              onClick={goToPrev}
-              aria-label="Image précédente"
-              className="pointer-events-auto carousel-control"
-            >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={goToNext}
-              aria-label="Image suivante"
-              className="pointer-events-auto carousel-control"
-            >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+        
+        {/* Enhanced Overlay with Gradient */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-black/70 pointer-events-none" aria-hidden="true"></div>
+        
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 z-5 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-yellow-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-300/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
+        
+        {/* Carousel Controls */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-30 flex justify-between items-center px-4 sm:px-6 lg:px-8 pointer-events-none">
+          <button
+            onClick={goToPrev}
+            className="carousel-control pointer-events-auto bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-black/70 focus-ring"
+            aria-label="Image précédente"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={goToNext}
+            className="carousel-control pointer-events-auto bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-black/70 focus-ring"
+            aria-label="Image suivante"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        
+        {/* Main Content */}
+        <div className="relative w-full flex flex-col items-center justify-center gap-8 z-20 px-4 sm:px-6 lg:px-8 text-center">
+          {/* Logo Section */}
+          <div className="flex items-center gap-4 mb-4 animate-fade-in-up">
+            <img
+              src="/LogoLb.png"
+              alt="Light Bulb Logo"
+              className="h-16 w-auto object-contain drop-shadow-2xl"
+            />
+            <img
+              src="/LogoAndName - Copy.png"
+              alt="Light Bulb Name Logo"
+              className="h-14 w-auto object-contain drop-shadow-2xl"
+            />
           </div>
-          <div className="flex justify-center gap-3 mt-12 mb-4">
-            {heroImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => triggerFade(idx)}
-                aria-label={`Aller à l'image ${idx + 1}`}
-                className={`carousel-dot ${heroIndex === idx ? 'active' : 'inactive'}`}
-              />
-            ))}
+          
+          {/* Main Heading */}
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
+              Nos
+            </span>
+            <br />
+            <span className="text-white drop-shadow-2xl font-black">
+              Réalisations
+            </span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-6xl mx-auto mb-8 leading-relaxed animate-fade-in-up font-medium px-4" style={{ animationDelay: '0.4s' }}>
+            <span className="bg-black/40 backdrop-blur-sm px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl leading-relaxed">
+              Découvrez nos projets électriques réalisés avec excellence et professionnalisme
+            </span>
+          </p>
+          
+          {/* Project Types Preview */}
+          <div className="flex items-center gap-8 mb-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Résidentiel</div>
+              <div className="text-sm md:text-base text-white/80">Maisons & Appartements</div>
+            </div>
+            <div className="w-px h-8 bg-white/30"></div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Commercial</div>
+              <div className="text-sm md:text-base text-white/80">Bureaux & Magasins</div>
+            </div>
+            <div className="w-px h-8 bg-white/30"></div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Industriel</div>
+              <div className="text-sm md:text-base text-white/80">Usines & Entrepôts</div>
+            </div>
+          </div>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <Link
+              to="/contact#devis"
+              className="group bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
+            >
+              <span>Demander un devis</span>
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+            </Link>
+            <Link
+              to="/services#services"
+              className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl border-2 border-white/30 hover:border-white/50 shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
+            >
+              <span>Nos services</span>
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+            </Link>
           </div>
         </div>
-      </section>
-
-      {/* Filter Tabs */}
-      <section className="w-full py-12 bg-[#ffffff]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-4">
-          {categories.map((category) => (
+        
+        {/* Carousel Dots - Moved outside main content */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex space-x-1 pointer-events-none">
+          {heroImages.map((_, index) => (
             <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#cad0dd] animate-fade-in-up ${
-                selectedCategory === category.id
-                  ? 'bg-[#f9ed9f] text-black scale-105 shadow-md'
-                  : 'bg-[#fffeee] text-[#333] hover:bg-[#f9ed9f] hover:text-black'
+              key={index}
+              onClick={() => triggerFade(index)}
+              className={`carousel-dot pointer-events-auto w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 focus-ring ${
+                index === heroIndex
+                  ? 'bg-yellow-400/80 scale-125'
+                  : 'bg-white/30 hover:bg-white/50'
               }`}
-              tabIndex={0}
-            >
-              {category.name}
-            </button>
+              aria-label={`Aller à l'image ${index + 1}`}
+            />
           ))}
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section className="w-full py-20 bg-[#f4f5f8]">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <a
-              key={project.id}
-              href={project.image || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card card-hover block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#cad0dd] animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 hover:shadow-2xl border-2 border-yellow-300"
-              style={{ animationDelay: `${index * 100}ms` }}
-              tabIndex={0}
-              aria-label={`Voir le projet ${project.title}`}
-            >
-              <div className="relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute top-4 right-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      project.category === 'residential'
-                        ? 'bg-blue-100 text-blue-800'
-                        : project.category === 'commercial'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-purple-100 text-purple-800'
-                    }`}
-                  >
-                    {project.category === 'residential'
-                      ? t('projects.residential')
-                      : project.category === 'commercial'
-                      ? t('projects.commercial')
-                      : t('projects.industrial')}
-                  </span>
+      <section id="projects" className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-white">
+        <div className="w-full">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+              Nos Projets Réalisés
+            </h2>
+            <div className="w-16 sm:w-24 h-1 bg-yellow-500 rounded mx-auto mb-8"></div>
+            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Découvrez une sélection de nos réalisations dans différents secteurs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="project-card bg-white border-2 border-yellow-300 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 group hover:-translate-y-2 overflow-hidden transform transition-all duration-800 cursor-pointer"
+                onClick={() => openProjectModal(project)}
+              >
+                {/* Project Image */}
+                <div className="w-full h-48 bg-gray-200 overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                
+                {/* Project Content */}
+                <div className="p-6 sm:p-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 group-hover:bg-yellow-200 transition-colors duration-300">
+                      {project.category}
+                    </span>
+                    <div className="flex items-center space-x-2 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
+                      <Clock className="w-4 h-4" />
+                      <span>{project.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300">
+                    {project.description}
+                  </p>
+                  
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2 group-hover:text-gray-800 transition-colors duration-300">
+                      Caractéristiques :
+                    </h4>
+                    <ul className="space-y-1">
+                      {project.features.slice(0, 3).map((feature, idx) => (
+                        <li key={idx} className="flex items-center space-x-2 text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 group-hover:translate-x-1 transition-all duration-300">
+                          <CheckCircle className="w-4 h-4 text-yellow-500 flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
+                      <Users className="w-4 h-4" />
+                      <span>{project.client}</span>
+                    </div>
+                    
+                    <div className="inline-flex items-center text-sm text-yellow-600 hover:text-yellow-700 font-semibold transition-colors duration-300 group-hover:translate-x-2">
+                      Voir détails
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="p-6">
-                <h3
-                  className="text-xl font-bold text-[#000] mb-2"
-                  style={{ fontSize: '1.35rem' }}
-                >
-                  {project.title}
-                </h3>
-                <p className="text-[#7d7d7d] mb-4">{project.description}</p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-base text-[#7d7d7d]">
-                    <User className="w-5 h-5 mr-2" />
-                    {project.client}
-                  </div>
-                  <div className="flex items-center text-base text-[#7d7d7d]">
-                    <MapPin className="w-5 h-5 mr-2" />
-                    {project.location}
-                  </div>
-                  <div className="flex items-center text-base text-[#7d7d7d]">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    {project.date}
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <h4 className="text-base font-semibold text-[#000] mb-2">
-                    {t('projects.features')}:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.features.map((feature, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-[#f9ed9f] text-[#333] text-sm rounded-full"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </a>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="w-full py-20 bg-[#eef0f4]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="flex flex-col items-center">
-            <Award className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">500+</div>
-            <div className="text-[#7d7d7d] text-base font-semibold">
-              Projets Réalisés
+      {/* Project Details Modal */}
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm project-modal-backdrop"
+            onClick={closeProjectModal}
+            aria-hidden="true"
+          />
+          
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto project-modal">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b-2 border-yellow-200 p-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                  {selectedProject.category}
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                  {selectedProject.title}
+                </h2>
+              </div>
+              <button
+                onClick={closeProjectModal}
+                className="p-2 rounded-full text-gray-500 hover:text-yellow-600 hover:bg-yellow-50 transition-all duration-300 focus-ring"
+                aria-label="Fermer la modal"
+              >
+                <X size={24} />
+              </button>
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <TrendingUp className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">20+</div>
-            <div className="text-[#7d7d7d] text-base font-semibold">
-              Années d'Expérience
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <Users className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">100%</div>
-            <div className="text-[#7d7d7d] text-base font-semibold">
-              Clients Satisfaits
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <Clock className="w-12 h-12 mb-2 text-[#f9ed9f]" />
-            <div className="text-3xl font-bold text-[#333]">24h</div>
-            <div className="text-[#7d7d7d] text-base font-semibold">
-              Service d'Urgence
+            
+            {/* Modal Body */}
+            <div className="p-6">
+              {/* Project Image */}
+              <div className="w-full h-64 sm:h-80 bg-gray-200 rounded-xl overflow-hidden mb-6">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Project Info Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {/* Basic Info */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <MapPin className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">{selectedProject.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Calendar className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Terminé en {selectedProject.completionDate}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Clock className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Durée: {selectedProject.duration}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Users className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Équipe: {selectedProject.teamSize}</span>
+                  </div>
+                </div>
+                
+                {/* Financial Info */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <DollarSign className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Budget: {selectedProject.budget}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Users className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Client: {selectedProject.client}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Star className="w-5 h-5 text-yellow-500" />
+                    <span className="font-medium">Note: {selectedProject.rating}/5</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Description */}
+              <div className="mb-8">
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Description du Projet</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {selectedProject.description}
+                </p>
+              </div>
+              
+              {/* Features */}
+              <div className="mb-8">
+                <h3 className="text-lg font-bold text-gray-800 mb-4">Caractéristiques Techniques</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {selectedProject.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-yellow-500 flex-shrink-0" />
+                      <span className="text-gray-700 font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Challenges & Solutions */}
+              {selectedProject.challenges && selectedProject.solutions && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Défis et Solutions</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-red-600 mb-3">Défis Rencontrés</h4>
+                      <ul className="space-y-2">
+                        {selectedProject.challenges.map((challenge, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-gray-600">
+                            <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                            <span>{challenge}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-green-600 mb-3">Solutions Appliquées</h4>
+                      <ul className="space-y-2">
+                        {selectedProject.solutions.map((solution, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-gray-600">
+                            <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                            <span>{solution}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Testimonial */}
+              {selectedProject.testimonials && (
+                <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border-l-4 border-yellow-400">
+                  <h3 className="text-lg font-bold text-gray-800 mb-3">Témoignage Client</h3>
+                  <blockquote className="text-gray-700 italic">
+                    "{selectedProject.testimonials}"
+                  </blockquote>
+                </div>
+              )}
+              
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t-2 border-yellow-200">
+                <Link
+                  to="/contact#devis"
+                  onClick={closeProjectModal}
+                  className="inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
+                >
+                  Demander un devis similaire
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+                <button
+                  onClick={closeProjectModal}
+                  className="inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
+                >
+                  Fermer
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
 
       {/* CTA Section */}
-      <section className="w-full py-20 bg-[#f9ed9f] text-center w-full px-0">
-        <div className="w-full">
-          <h2 className="text-4xl font-bold text-[#000] mb-4">
-            Votre Projet Sera le Prochain ?
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-r from-yellow-500 to-yellow-600">
+        <div className="w-full text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6">
+            Votre Projet Suivant ?
           </h2>
-          <p className="text-xl text-[#7d7d7d] mb-8 max-w-2xl mx-auto">
-            Rejoignez nos clients satisfaits et confiez-nous votre projet
-            électrique.
+          <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/contact"
-              className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white px-8 py-4 rounded-xl font-extrabold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 animate-fade-in-up mt-2"
+              to="/contact#devis"
+              className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-lg transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:-translate-y-1"
             >
-              Demander un Devis
+              Demander un devis
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-            <a
-              href="/services"
-              className="border-2 border-black hover:bg-black hover:text-white text-black px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group"
+            <Link
+              to="/services#services"
+              className="inline-flex items-center bg-transparent text-white border-2 border-white hover:bg-white hover:text-yellow-600 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:-translate-y-1"
             >
-              Voir Nos Services
-            </a>
+              Nos services
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
           </div>
         </div>
       </section>

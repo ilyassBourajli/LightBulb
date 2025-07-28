@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import PlanSite from './pages/PlanSite';
 import WhatsAppButton from './components/WhatsAppButton';
+import './i18n';
 
 // Loading component
 const LoadingSpinner = () => (
@@ -22,6 +23,17 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// ScrollToTop component to automatically scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   const { i18n } = useTranslation();
   useEffect(() => {
@@ -29,6 +41,7 @@ function App() {
   }, [i18n.language]);
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-white w-full">
         <Header />
         <main className="relative w-full">
