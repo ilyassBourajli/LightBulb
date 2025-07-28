@@ -1,341 +1,295 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Award, Users, Clock, Target, ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Award, Shield, Clock, Target, ArrowRight, Users, Truck, Zap, CheckCircle, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const heroImages = [
-  { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
-  { src: '/arm.jpg', caption: 'Installation professionnelle' },
-  { src: '/pexels-kseniachernaya-5691642.jpg', caption: 'Matériel de qualité' },
-  { src: '/pexels-lamiko-3616745.jpg', caption: 'Solutions innovantes' },
-  { src: '/prise entrer.jpg', caption: 'Prises sécurisées' },
-  { src: '/prise.jpg', caption: 'Finitions impeccables' },
-];
-
-const About = () => {
-  const { t } = useTranslation();
-  const values = [
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: t('about.values.0.title'),
-      description: t('about.values.0.description'),
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: t('about.values.1.title'),
-      description: t('about.values.1.description'),
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: t('about.values.2.title'),
-      description: t('about.values.2.description'),
-    },
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: t('about.values.3.title'),
-      description: t('about.values.3.description'),
-    },
-  ];
-
-  // Carousel logic (same as Home)
-  const [heroIndex, setHeroIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [fade, setFade] = useState(true);
-
-  const triggerFade = useCallback(
-    (nextIndex: number) => {
-      setFade(false);
-      setTimeout(() => {
-        setPrevIndex(heroIndex);
-        setHeroIndex(nextIndex);
-        setFade(true);
-      }, 300);
-    },
-    [heroIndex]
-  );
-
-  useEffect(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      triggerFade((heroIndex + 1) % heroImages.length);
-    }, 5000);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [heroIndex, triggerFade]);
-
-  const goToPrev = () =>
-    triggerFade((heroIndex - 1 + heroImages.length) % heroImages.length);
-  const goToNext = () => triggerFade((heroIndex + 1) % heroImages.length);
-
+export default function About() {
   return (
-    <div>
-      {/* Hero Section with Carousel */}
-      <section className="w-full min-h-[60vh] bg-cover bg-center relative flex items-center justify-center transition-all duration-700">
-        {/* Crossfade Background Images */}
-        <div className="absolute inset-0 z-0">
-          <div
-            className={`absolute inset-0 transition-all duration-700 ${
-              fade ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-            }`}
-            style={{
-              backgroundImage: `url('${heroImages[heroIndex].src}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-            aria-hidden="true"
+    <div className="w-full">
+      {/* Section Hero avec image de fond */}
+      <section className="relative w-full h-96 md:h-[500px] overflow-hidden">
+        {/* Image de fond */}
+        <div className="absolute inset-0">
+          <img 
+            src="/hero.jpg" 
+            alt="Matériel électrique professionnel Light Bulb" 
+            className="w-full h-full object-cover"
           />
-          {heroIndex !== prevIndex && (
-            <div
-              className={`absolute inset-0 transition-all duration-700 opacity-0 scale-100`}
-              style={{
-                backgroundImage: `url('${heroImages[prevIndex].src}')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-              aria-hidden="true"
-            />
-          )}
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        {/* Top dark overlay for text readability */}
-        <div
-          className="absolute inset-0 z-10 hero-overlay pointer-events-none"
-          aria-hidden="true"
-        ></div>
-        <div className="relative w-full flex flex-col items-center justify-center gap-6 z-20 responsive-padding text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 bg-clip-text text-transparent drop-shadow-xl animate-fade-in-up tracking-wide">
-            À Propos de <span className="ml-2 font-extrabold text-white drop-shadow-md">LIGHT BULB</span>
-          </h1>
-          <p className="text-body-large text-white/95 max-w-4xl mx-auto mb-4 leading-relaxed lg:bg-black/20 lg:rounded-2xl lg:px-8 lg:py-4 lg:backdrop-blur-professional animate-fade-in-up text-shadow">
-            Votre partenaire de confiance pour tous vos besoins en électricité au Maroc.
-          </p>
-          {heroImages[heroIndex].caption && (
-            <div className="flex flex-col items-center gap-4 mt-4 mb-6">
-              <div className="heading-tertiary bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-700 bg-clip-text text-transparent text-shadow-lg animate-scale-in animate-float">
-                {heroImages[heroIndex].caption}
-              </div>
-              <div className="btn-group-professional mt-4">
-                <Link
-                  to="/contact"
-                  className="btn-primary animate-fade-in-up flex items-center gap-2 animate-pulse-glow"
-                >
-                  Demander un devis
-                  <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" style={{ verticalAlign: 'middle' }} />
-                </Link>
-              </div>
-            </div>
-          )}
-          <div className="absolute left-0 right-0 flex justify-between items-center px-4 top-1/2 -translate-y-1/2 pointer-events-none select-none">
-            <button
-              onClick={goToPrev}
-              aria-label="Image précédente"
-              className="pointer-events-auto carousel-control"
-            >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={goToNext}
-              aria-label="Image suivante"
-              className="pointer-events-auto carousel-control"
-            >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-          <div className="flex justify-center gap-3 mt-12 mb-4">
-            {heroImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => triggerFade(idx)}
-                aria-label={`Aller à l'image ${idx + 1}`}
-                className={`carousel-dot ${heroIndex === idx ? 'active' : 'inactive'}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company Story */}
-      <section className="w-full py-24 bg-background w-full px-0">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-secondary mb-6">
-              Notre Histoire
-            </h2>
-            <div className="space-y-4 text-brand-blue">
-              <p>
-                Fondée à Mohammedia, LIGHT BULB est née de la passion pour
-                l'excellence dans le domaine électrique. Depuis nos débuts, nous
-                nous sommes imposés comme une référence dans la vente de
-                matériel électrique et les services d'installation.
-              </p>
-              <p>
-                Notre équipe d'experts qualifiés met son savoir-faire au service
-                des particuliers, entreprises et collectivités partout au Maroc.
-                Nous combinons tradition artisanale marocaine et technologies
-                modernes pour offrir des solutions électriques durables et
-                fiables.
-              </p>
-              <p>
-                Nous connaissons parfaitement les spécificités locales et les
-                besoins de notre clientèle à travers tout le Maroc. Cette
-                proximité nous permet d'offrir un service personnalisé et
-                réactif.
-              </p>
-            </div>
-          </div>
-          <div className="bg-secondary border border-primary rounded-2xl p-8 shadow-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-            <div className="grid grid-cols-2 gap-6 text-center">
-              <div>
-                <div className="text-3xl font-bold text-white mb-2">20+</div>
-                <div className="text-primary">Années d'expérience</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white mb-2">500+</div>
-                <div className="text-primary">Projets réalisés</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white mb-2">24h</div>
-                <div className="text-primary">Délai de réponse</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white mb-2">100%</div>
-                <div className="text-primary">Clients satisfaits</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Values */}
-      <section className="w-full py-24 bg-background w-full px-0">
-        <div className="w-full text-center mb-16">
-          <h2 className="text-3xl font-bold text-secondary mb-4">
-            Notre Mission & Nos Valeurs
-          </h2>
-          <p className="text-xl text-brand-blue max-w-3xl mx-auto">
-            Nous nous engageons à fournir des solutions électriques de qualité
-            tout en respectant nos valeurs fondamentales.
-          </p>
-        </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-8">
-          {values.map((value, index) => (
-            <div
-              key={index}
-              className="card card-hover flex flex-col items-center animate-fade-in-up transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 hover:shadow-2xl bg-white text-secondary border-2 border-yellow-300"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="text-primary mb-4 flex justify-center">
-                {React.cloneElement(value.icon, { className: 'w-12 h-12' })}
-              </div>
-              <h3
-                className="text-xl font-semibold text-secondary mb-3"
-                style={{ fontSize: '1.25rem' }}
+        
+        {/* Contenu overlay */}
+        <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-white max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 bg-clip-text text-transparent drop-shadow-xl animate-fade-in-up tracking-wide">
+              À Propos de Light Bulb
+            </h1>
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white drop-shadow-lg">
+              Plus de 20 ans d'expertise en matériel électrique
+            </p>
+            <p className="text-base md:text-lg mb-8 text-gray-200 drop-shadow-lg">
+              Votre partenaire de confiance à Mohammedia et partout au Maroc
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 text-lg"
               >
-                {value.title}
-              </h3>
-              <p className="text-brand-blue">{value.description}</p>
+                Demander un devis
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+              <Link
+                to="/services"
+                className="inline-flex items-center bg-white hover:bg-gray-100 text-gray-800 font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 text-lg border-2 border-yellow-300"
+              >
+                Nos services
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* Mission Statement */}
-      <section className="w-full py-24 bg-background">
-        <div className="w-full px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-primary rounded-2xl p-12 shadow-md inline-block transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-            <h2 className="text-3xl font-bold text-secondary mb-6">
-              Notre Mission
-            </h2>
-            <p className="text-xl text-brand-blue max-w-4xl mx-auto leading-relaxed">
-              Être le partenaire électrique de référence à Mohammedia en offrant
-              des produits de qualité, des services professionnels et un
-              accompagnement personnalisé pour chaque projet, du plus simple au
-              plus complexe.
+      {/* Section Qui sommes-nous avec fond dégradé */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-br from-yellow-50 to-yellow-100">
+        <div className="text-center space-y-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-600 mb-4">Qui sommes-nous ?</h2>
+          <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
+            <strong>Light Bulb</strong> est votre partenaire de confiance en matériel électrique, basé à Mohammedia et intervenant partout au Maroc.<br />
+            Plus de 20 ans d'expérience au service des particuliers et des professionnels.
+          </p>
+          <p className="italic text-gray-600 text-lg">Entreprise familiale animée par la passion de l'électricité et le sens du service.</p>
+        </div>
+      </section>
+
+      {/* Section Notre Mission & Nos Valeurs */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-white">
+        <div className="w-full">
+          <h2 className="text-3xl font-bold text-yellow-600 mb-6 text-center">Notre Mission & Nos Valeurs</h2>
+          <p className="text-gray-700 text-center mb-12 text-lg">
+            Nous nous engageons à fournir des solutions électriques de qualité tout en respectant nos valeurs fondamentales.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Carte Excellence */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 animate-fade-in-up">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4">
+                  <Award className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Excellence</h3>
+                <p className="text-gray-600 text-sm">
+                  Nous nous engageons à fournir des services de la plus haute qualité avec des matériaux certifiés.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Confiance */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4">
+                  <Shield className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Confiance</h3>
+                <p className="text-gray-600 text-sm">
+                  Nos clients nous font confiance pour leurs projets les plus importants depuis plus de 20 ans.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Réactivité */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4">
+                  <Clock className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Réactivité</h3>
+                <p className="text-gray-600 text-sm">
+                  Service client disponible et interventions rapides pour tous vos besoins urgents.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Précision */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4">
+                  <Target className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Précision</h3>
+                <p className="text-gray-600 text-sm">
+                  Chaque installation est réalisée avec précision selon les normes marocaines et internationales.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Images côte à côte */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <img 
+                src="/entrepot.jpg" 
+                alt="Entrepôt Light Bulb - Stock important de matériel électrique" 
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4 bg-white">
+                <h3 className="font-bold text-gray-800 mb-2">Notre Entrepôt</h3>
+                <p className="text-gray-600 text-sm">Stock important pour une livraison rapide partout au Maroc</p>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <img 
+                src="/equipe.jpg" 
+                alt="Équipe Light Bulb - Passionnés d'électricité" 
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4 bg-white">
+                <h3 className="font-bold text-gray-800 mb-2">Notre Équipe</h3>
+                <p className="text-gray-600 text-sm">Passionnés d'électricité, toujours à l'écoute de nos clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Pourquoi choisir Light Bulb - Cartes */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
+        <div className="w-full">
+          <h2 className="text-3xl font-bold text-yellow-600 mb-8 text-center">Pourquoi choisir Light Bulb ?</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Carte Expertise */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-yellow-500 rounded-xl text-white mb-4">
+                  <Award className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Expertise Reconnue</h3>
+                <p className="text-gray-600 text-sm">
+                  Plus de 20 ans d'expérience et conseils personnalisés pour tous vos projets.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Entreprise Familiale */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-yellow-500 rounded-xl text-white mb-4">
+                  <Users className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Entreprise Familiale</h3>
+                <p className="text-gray-600 text-sm">
+                  Proche de ses clients, avec un service personnalisé et une écoute attentive.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Livraison Rapide */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-yellow-500 rounded-xl text-white mb-4">
+                  <Truck className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Livraison Rapide</h3>
+                <p className="text-gray-600 text-sm">
+                  Stock local important pour une disponibilité immédiate et une livraison express.
+                </p>
+              </div>
+            </div>
+
+            {/* Carte Solutions Adaptées */}
+            <div className="bg-white border-2 border-yellow-300 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-yellow-500 rounded-xl text-white mb-4">
+                  <Zap className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">Solutions Adaptées</h3>
+                <p className="text-gray-600 text-sm">
+                  Solutions pour tous les besoins, particuliers ou professionnels, sur mesure.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Notre engagement au Maroc - Mise en valeur */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-white">
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 border-2 border-yellow-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-blue-400/60">
+            <h2 className="text-3xl font-bold text-yellow-600 mb-6 text-center">Notre engagement au Maroc</h2>
+            <div className="flex items-center justify-center mb-6">
+              <MapPin className="w-8 h-8 text-yellow-600 mr-3" />
+              <span className="text-lg font-semibold text-gray-800">Mohammedia - Tout le Maroc</span>
+            </div>
+            <p className="text-gray-700 text-center text-lg leading-relaxed">
+              Implantés à Mohammedia, nous livrons et accompagnons nos clients sur tout le territoire marocain. 
+              Notre mission : rendre le matériel électrique de qualité accessible à tous, avec un service irréprochable 
+              et une écoute attentive. Chaque membre de notre équipe est engagé à offrir un service de proximité, 
+              comme si chaque client faisait partie de la famille.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Expertise */}
-      <section className="w-full py-24 bg-background">
-        <div className="w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-secondary mb-6">
-              Notre Expertise
-            </h2>
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0"></div>
-                <div>
-                  <h3
-                    className="text-lg font-semibold text-secondary mb-2"
-                    style={{ fontSize: '1.15rem' }}
-                  >
-                    Matériel Électrique Professionnel
-                  </h3>
-                  <p className="text-brand-blue">
-                    Distribution de matériel électrique de marques reconnues,
-                    conformes aux normes marocaines et européennes.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0"></div>
-                <div>
-                  <h3
-                    className="text-lg font-semibold text-secondary mb-2"
-                    style={{ fontSize: '1.15rem' }}
-                  >
-                    Installation & Mise en Service
-                  </h3>
-                  <p className="text-brand-blue">
-                    Installation complète d'équipements électriques pour
-                    résidentiel, commercial et industriel.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="w-3 h-3 bg-primary rounded-full mt-3 flex-shrink-0"></div>
-                <div>
-                  <h3
-                    className="text-lg font-semibold text-secondary mb-2"
-                    style={{ fontSize: '1.15rem' }}
-                  >
-                    Maintenance & Dépannage
-                  </h3>
-                  <p className="text-brand-blue">
-                    Services de maintenance préventive et interventions
-                    d'urgence 24h/7j pour assurer la continuité de vos
-                    activités.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* Section Contact & Call-to-action */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gray-50">
+        <div className="w-full max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-yellow-600 mb-6">Contactez-nous</h2>
+          <p className="text-gray-700 text-lg mb-8">
+            Nous répondons par téléphone, WhatsApp, e-mail ou directement en magasin.<br />
+            Besoin d'un conseil, d'un devis ou d'un produit spécifique ?
+          </p>
+          
+          {/* Icônes de contact */}
+          <div className="flex justify-center space-x-8 mb-8">
+            <a 
+              href="tel:+212 661 06 74 91" 
+              className="flex items-center text-gray-600 hover:text-yellow-600 transition-colors duration-300 cursor-pointer"
+            >
+              <Phone className="w-5 h-5 mr-2 text-yellow-600" />
+              <span className="text-sm">Téléphone</span>
+            </a>
+            <a 
+              href="mailto:contact@lightbulb.ma" 
+              className="flex items-center text-gray-600 hover:text-yellow-600 transition-colors duration-300 cursor-pointer"
+            >
+              <Mail className="w-5 h-5 mr-2 text-yellow-600" />
+              <span className="text-sm">Email</span>
+            </a>
+            <a 
+              href="https://www.google.com/maps/dir//Light+Bulb+N%C2%B0+248+Hassania+2+bloc+B,+RDC+Bd+de+Riyad+Mohamm%C3%A9dia/@33.6751623,-7.3918596,1876m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0xda7b1d1bad02a91:0xd8b7db26cdd93cd1!2m2!1d-7.3918596!2d33.6751623?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center text-gray-600 hover:text-yellow-600 transition-colors duration-300 cursor-pointer"
+            >
+              <MapPin className="w-5 h-5 mr-2 text-yellow-600" />
+              <span className="text-sm">En magasin</span>
+            </a>
           </div>
-          <div className="bg-secondary border border-primary rounded-2xl p-8 shadow-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-            <h3 className="text-2xl font-bold text-white mb-6 text-center">
-              Certifications & Agréments
-            </h3>
-            <div className="space-y-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="flex items-center space-x-3">
-                  <Award className="w-8 h-8 text-primary" />
-                  <span className="text-white text-base">
-                    {t(`about.certifications.item${i}`)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+
+          <p className="font-semibold text-gray-800 mb-8">
+            Contactez-nous dès maintenant : nous sommes à votre écoute.
+          </p>
+          
+          <Link
+            to="/contact"
+            className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 text-lg"
+          >
+            Demander un devis
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer SEO */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-8 bg-white border-t border-gray-200">
+        <div className="w-full max-w-4xl mx-auto text-center">
+          <p className="text-gray-600 text-sm">
+            <strong>Light Bulb</strong> vous accompagne dans tous vos projets électriques à Mohammedia, Casablanca, Tanger, Marrakech et partout au Maroc. 
+            Votre partenaire de confiance pour tous vos besoins en matériel électrique de qualité.
+          </p>
         </div>
       </section>
     </div>
   );
-};
-
-export default About;
+}
