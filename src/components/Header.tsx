@@ -202,10 +202,10 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-50 no-print ${isMenuOpen ? 'block' : 'hidden'}`} ref={menuRef}>
+      <div className={`fixed inset-0 z-[9999] no-print ${isMenuOpen ? 'block' : 'hidden'}`} ref={menuRef}>
         {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-black/60 transition-opacity duration-500 backdrop-blur-md"
+          className="absolute inset-0 bg-black/80 transition-opacity duration-500 backdrop-blur-lg"
           onClick={() => setIsMenuOpen(false)}
           aria-hidden="true"
         />

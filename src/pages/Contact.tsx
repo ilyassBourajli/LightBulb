@@ -342,7 +342,7 @@ Je souhaite recevoir un devis personnalisé.`;
         </div>
         
         {/* Carousel Dots - Moved outside main content */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex space-x-1 pointer-events-none">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 flex space-x-1 pointer-events-none">
           {heroImages.map((_, index) => (
             <button
               key={index}
