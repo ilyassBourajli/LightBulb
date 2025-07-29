@@ -211,38 +211,38 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
         />
 
         {/* Menu Panel */}
-        <div className={`mobile-menu overflow-y-auto bg-gradient-to-br from-white via-yellow-50 to-white flex flex-col ${isMenuOpen ? 'open' : ''}`}>
+        <div className={`mobile-menu overflow-y-auto bg-gradient-to-br from-white via-yellow-50 to-white flex flex-col max-h-screen ${isMenuOpen ? 'open' : ''}`}>
           {/* Header */}
-          <div className="flex items-center justify-between px-6 sm:px-8 pt-8 sm:pt-10 pb-6 border-b-2 border-yellow-200/50">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 md:pt-10 pb-4 sm:pb-6 border-b-2 border-yellow-200/50 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3">
               <img
                 src="/LogoLb.png"
                 alt="Light Bulb Logo"
-                className="h-10 w-auto object-contain"
+                className="h-8 sm:h-10 w-auto object-contain"
               />
               <img
                 src="/LogoAndName - Copy.png"
                 alt="Light Bulb Name Logo"
-                className="h-8 w-auto object-contain"
+                className="h-6 sm:h-8 w-auto object-contain"
               />
             </div>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="p-3 rounded-full text-gray-700 hover:text-yellow-600 bg-yellow-100 hover:bg-yellow-200 transition-all duration-300 focus-ring hover:scale-110 shadow-lg"
+              className="p-2 sm:p-3 rounded-full text-gray-700 hover:text-yellow-600 bg-yellow-100 hover:bg-yellow-200 transition-all duration-300 focus-ring hover:scale-110 shadow-lg"
               aria-label="Fermer le menu"
             >
-              <X size={24} className="sm:w-6 sm:h-6" />
+              <X size={20} className="sm:w-6 sm:h-6" />
             </button>
           </div>
 
           {/* Navigation */}
-          <nav className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 w-full max-w-sm mx-auto px-6 sm:px-8 py-8 flex-1">
+          <nav className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 md:space-y-6 w-full max-w-sm mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 flex-1 overflow-y-auto">
             {navigation.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`mobile-menu-link w-full text-center py-4 px-6 rounded-2xl font-semibold text-lg sm:text-xl transform hover:scale-105 focus-ring transition-all duration-300 shadow-lg hover:shadow-xl ${
+                className={`mobile-menu-link w-full text-center py-3 sm:py-4 px-4 sm:px-6 rounded-2xl font-semibold text-base sm:text-lg md:text-xl transform hover:scale-105 focus-ring transition-all duration-300 shadow-lg hover:shadow-xl ${
                   isActive(item.href)
                     ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-yellow-300/50'
                     : 'bg-white text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 border-2 border-transparent hover:border-yellow-300'
@@ -255,8 +255,8 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
           </nav>
 
           {/* Language Selector - Mobile */}
-          <div className="flex items-center gap-3 sm:gap-4 justify-center py-8 border-t-2 border-yellow-200/50 px-6 sm:px-8">
-            <div className="flex gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 justify-center py-6 sm:py-8 border-t-2 border-yellow-200/50 px-4 sm:px-6 md:px-8 flex-shrink-0">
+            <div className="flex gap-1 sm:gap-2 md:gap-3">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
@@ -264,7 +264,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                     i18n.changeLanguage(lang.code);
                     setIsMenuOpen(false);
                   }}
-                  className={`px-4 sm:px-5 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-bold border-2 transition-all duration-300 focus-ring hover:scale-105 shadow-md hover:shadow-lg ${
+                  className={`px-3 sm:px-4 md:px-5 py-2 sm:py-3 rounded-xl text-xs sm:text-sm md:text-base font-bold border-2 transition-all duration-300 focus-ring hover:scale-105 shadow-md hover:shadow-lg ${
                     i18n.language === lang.code
                       ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-white border-yellow-400 shadow-yellow-300/50'
                       : 'bg-white text-gray-700 border-yellow-300 hover:bg-yellow-50 hover:border-yellow-400'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   ArrowRight,
   CheckCircle,
@@ -41,6 +42,7 @@ interface Project {
 }
 
 const Projects = () => {
+  const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -327,35 +329,35 @@ const Projects = () => {
           {/* Main Heading */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
-              Nos
+              {t('projects.our_realizations')}
             </span>
             <br />
             <span className="text-white drop-shadow-2xl font-black">
-              Réalisations
+              {t('projects.our_realizations')}
             </span>
           </h1>
           
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-6xl mx-auto mb-8 leading-relaxed animate-fade-in-up font-medium px-4" style={{ animationDelay: '0.4s' }}>
             <span className="bg-black/40 backdrop-blur-sm px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl leading-relaxed">
-              Découvrez nos projets électriques réalisés avec excellence et professionnalisme
+              {t('projects.discover_some_of_our_recent_projects')}
             </span>
           </p>
           
           {/* Project Types Preview */}
           <div className="flex items-center gap-8 mb-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Résidentiel</div>
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('projects.residential')}</div>
               <div className="text-sm md:text-base text-white/80">Maisons & Appartements</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Commercial</div>
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('projects.commercial')}</div>
               <div className="text-sm md:text-base text-white/80">Bureaux & Magasins</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Industriel</div>
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('projects.industrial')}</div>
               <div className="text-sm md:text-base text-white/80">Usines & Entrepôts</div>
             </div>
           </div>
@@ -366,14 +368,14 @@ const Projects = () => {
               to="/contact#devis"
               className="group bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Demander un devis</span>
+              <span>{t('projects.request_a_quote')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
             <Link
               to="/services#services"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl border-2 border-white/30 hover:border-white/50 shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Nos services</span>
+              <span>{t('projects.see_our_services')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
@@ -401,11 +403,11 @@ const Projects = () => {
         <div className="w-full">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-              Nos Projets Réalisés
+              {t('projects.our_realizations')}
             </h2>
             <div className="w-16 sm:w-24 h-1 bg-yellow-500 rounded mx-auto mb-8"></div>
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-              Découvrez une sélection de nos réalisations dans différents secteurs
+              {t('projects.discover_some_of_our_recent_projects')}
             </p>
           </div>
           
@@ -447,7 +449,7 @@ const Projects = () => {
                   
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-700 mb-2 group-hover:text-gray-800 transition-colors duration-300">
-                      Caractéristiques :
+                      {t('projects.features')}:
                     </h4>
                     <ul className="space-y-1">
                       {project.features.slice(0, 3).map((feature, idx) => (
@@ -466,7 +468,7 @@ const Projects = () => {
                     </div>
                     
                     <div className="inline-flex items-center text-sm text-yellow-600 hover:text-yellow-700 font-semibold transition-colors duration-300 group-hover:translate-x-2">
-                      Voir détails
+                      {t('projects.see_details')}
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
@@ -560,7 +562,7 @@ const Projects = () => {
               
               {/* Description */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">Description du Projet</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">{t('projects.project_description')}</h3>
                 <p className="text-gray-600 leading-relaxed">
                   {selectedProject.description}
                 </p>
@@ -568,7 +570,7 @@ const Projects = () => {
               
               {/* Features */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">Caractéristiques Techniques</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-4">{t('projects.technical_features')}</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {selectedProject.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
@@ -582,10 +584,10 @@ const Projects = () => {
               {/* Challenges & Solutions */}
               {selectedProject.challenges && selectedProject.solutions && (
                 <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-800 mb-4">Défis et Solutions</h3>
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">{t('projects.challenges_and_solutions')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-red-600 mb-3">Défis Rencontrés</h4>
+                      <h4 className="font-semibold text-red-600 mb-3">{t('projects.challenges_encountered')}</h4>
                       <ul className="space-y-2">
                         {selectedProject.challenges.map((challenge, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-gray-600">
@@ -596,7 +598,7 @@ const Projects = () => {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-green-600 mb-3">Solutions Appliquées</h4>
+                      <h4 className="font-semibold text-green-600 mb-3">{t('projects.applied_solutions')}</h4>
                       <ul className="space-y-2">
                         {selectedProject.solutions.map((solution, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-gray-600">
@@ -613,7 +615,7 @@ const Projects = () => {
               {/* Testimonial */}
               {selectedProject.testimonials && (
                 <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border-l-4 border-yellow-400">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">Témoignage Client</h3>
+                  <h3 className="text-lg font-bold text-gray-800 mb-3">{t('projects.client_testimonial')}</h3>
                   <blockquote className="text-gray-700 italic">
                     "{selectedProject.testimonials}"
                   </blockquote>
@@ -627,14 +629,14 @@ const Projects = () => {
                   onClick={closeProjectModal}
                   className="inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
                 >
-                  Demander un devis similaire
+                  {t('projects.request_similar_quote')}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
                 <button
                   onClick={closeProjectModal}
                   className="inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
                 >
-                  Fermer
+                  {t('projects.close')}
                 </button>
               </div>
             </div>
@@ -646,24 +648,24 @@ const Projects = () => {
       <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-r from-yellow-500 to-yellow-600">
         <div className="w-full text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6">
-            Votre Projet Suivant ?
+            {t('projects.your_next_project')}
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
+            {t('projects.contact_us_to_discuss_your_project')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/contact#devis"
               className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-lg transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:-translate-y-1"
             >
-              Demander un devis
+              {t('projects.request_a_quote')}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
             <Link
               to="/services#services"
               className="inline-flex items-center bg-transparent text-white border-2 border-white hover:bg-white hover:text-yellow-600 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:-translate-y-1"
             >
-              Nos services
+              {t('projects.see_our_services')}
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>

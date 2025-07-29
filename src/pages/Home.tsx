@@ -189,22 +189,14 @@ const Home = () => {
           {/* Main Heading */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
-              Solutions
-            </span>
-            <br />
-            <span className="text-white drop-shadow-2xl font-black">
-              Électriques
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-2xl">
-              Professionnelles
+              {t('home.hero.title')}
             </span>
           </h1>
           
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-6xl mx-auto mb-8 leading-relaxed animate-fade-in-up font-medium px-4" style={{ animationDelay: '0.4s' }}>
             <span className="bg-black/40 backdrop-blur-sm px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl leading-relaxed">
-              Pour Résidences et Entreprises : sécurité, innovation et expertise à votre service
+              {t('home.hero.subtitle')}
             </span>
           </p>
           
@@ -224,14 +216,14 @@ const Home = () => {
               to="/contact#devis"
               className="group bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Demander un devis</span>
+              <span>{t('home.hero.quote')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
             <Link
               to="/services#services"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl border-2 border-white/30 hover:border-white/50 shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Nos services</span>
+              <span>{t('home.hero.services')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
@@ -240,17 +232,17 @@ const Home = () => {
           <div className="flex items-center gap-8 mt-12 animate-fade-in-up" style={{ animationDelay: '1s' }}>
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">20+</div>
-              <div className="text-sm md:text-base text-white/80">Années d'expérience</div>
+              <div className="text-sm md:text-base text-white/80">{t('home.stats.1')}</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">1000+</div>
-              <div className="text-sm md:text-base text-white/80">Clients satisfaits</div>
+              <div className="text-sm md:text-base text-white/80">{t('home.stats.2')}</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">24/7</div>
-              <div className="text-sm md:text-base text-white/80">Support disponible</div>
+              <div className="text-sm md:text-base text-white/80">{t('home.stats.3')}</div>
             </div>
           </div>
         </div>
@@ -282,7 +274,7 @@ const Home = () => {
                 <TrendingUp className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">20+</h3>
-              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Années d'expérience</p>
+              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.1')}</p>
             </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
               <div className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-yellow-400 rounded-full shadow-lg mb-4 relative group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
@@ -290,7 +282,7 @@ const Home = () => {
                 <Users className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">1000+</h3>
-              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Clients satisfaits</p>
+              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.2')}</p>
             </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
               <div className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-yellow-400 rounded-full shadow-lg mb-4 relative group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
@@ -298,15 +290,15 @@ const Home = () => {
                 <CheckCircle className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">500+</h3>
-              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Projets réalisés</p>
+              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.0')}</p>
             </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
               <div className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-yellow-400 rounded-full shadow-lg mb-4 relative group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                 <div className="absolute inset-0 rounded-full border-4 border-white opacity-80"></div>
-                <Award className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
+                <Zap className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">24/7</h3>
-              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">Support disponible</p>
+              <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.3')}</p>
             </div>
           </div>
         </div>

@@ -86,9 +86,9 @@ const resources = {
           call: 'Appeler Maintenant',
         },
         hero: {
-          title: 'Votre Expert en <1>Électricité</1> à Mohammedia',
+          title: 'Solutions Électriques Professionnelles',
           subtitle:
-            'LIGHT BULB vous accompagne dans tous vos projets électriques : vente de matériel, installation, maintenance et dépannage.',
+            'Pour Résidences et Entreprises : sécurité, innovation et expertise à votre service',
           quote: 'Demander un Devis',
           services: 'Nos Services',
         },
@@ -98,7 +98,7 @@ const resources = {
           title: 'À Propos de',
           company: 'LIGHT BULB',
           description:
-            'Votre partenaire de confiance pour tous vos besoins en électricité à Mohammedia et dans la région de Casablanca.',
+            'Votre partenaire électricité de confiance au Maroc depuis plus de 20 ans',
         },
         companyStory: {
           title: 'Notre Histoire',
@@ -108,6 +108,13 @@ const resources = {
             "Notre équipe d'experts qualifiés met son savoir-faire au service des particuliers, entreprises et collectivités de la région. Nous combinons tradition artisanale marocaine et technologies modernes pour offrir des solutions électriques durables et fiables.",
           paragraph3:
             "Basés au cœur de Mohammedia, nous connaissons parfaitement les spécificités locales et les besoins de notre clientèle. Cette proximité nous permet d'offrir un service personnalisé et réactif.",
+          description: {
+            part1: "Light Bulb",
+            part2: "est votre partenaire de confiance en matériel électrique, basé à Mohammedia et intervenant partout au Maroc. Plus de 20 ans d'expérience au service des particuliers et des professionnels."
+          },
+          values: {
+            description: "Entreprise familiale animée par la passion de l'électricité et le sens du service."
+          },
           stats: {
             years: "Années d'expérience",
             projects: 'Projets réalisés',
@@ -129,7 +136,7 @@ const resources = {
           {
             title: 'Confiance',
             description:
-              'Nos clients nous font confiance pour leurs projets les plus importants depuis plus de 10 ans.',
+              'Nos clients nous font confiance pour leurs projets les plus importants depuis plus de 20 ans.',
           },
           {
             title: 'Réactivité',
@@ -177,7 +184,7 @@ const resources = {
         title: 'Nos Services',
         title_highlight: 'Services',
         description:
-          "De la vente de matériel électrique aux travaux d'installation et de maintenance, LIGHT BULB vous accompagne dans tous vos projets électriques.",
+          "Solutions électriques complètes pour tous vos besoins professionnels et résidentiels",
         request_quote: 'Demander un Devis',
         professional_service: 'Service Professionnel',
         professional_service_description:
@@ -202,7 +209,7 @@ const resources = {
         our_realizations: 'Nos Réalisations',
         our_realizations_highlight: 'Réalisations',
         discover_some_of_our_recent_projects:
-          'Découvrez quelques-uns de nos projets récents',
+          'Découvrez nos projets électriques réalisés avec excellence et professionnalisme',
         demonstrate_our_expertise: 'qui témoignent de notre expertise',
         and_the_quality_of_our_electrical_installations:
           'et de la qualité de nos installations électriques.',
@@ -282,6 +289,41 @@ const resources = {
         contact_courrier_value:
           'Par courrier : Hassania 2, Bloc B N°248, Bd Mohamed VI, Mohammedia, Maroc',
         derniere_mise_a_jour_value: 'Dernière mise à jour : {date}',
+        legal_documents_title: 'Documents Légaux',
+        useful_links_title: 'Liens Utiles',
+        site_map_link: 'Plan du site',
+        contact_link: 'Nous contacter',
+        legal_info_subtitle: 'Informations légales et conditions d\'utilisation du site LIGHT BULB',
+      },
+      planSite: {
+        title: 'Plan du Site',
+        subtitle: 'Retrouvez ici l\'ensemble des pages et sections principales du site LIGHT BULB pour une navigation facilitée et optimale.',
+        quickAccess: 'Accès Rapide',
+        mainPages: 'Pages Principales',
+        mainPagesDescription: 'Navigation principale du site',
+        legalInfo: 'Informations Légales',
+        legalInfoDescription: 'Documents et mentions légales',
+        specializedServices: 'Services Spécialisés',
+        specializedServicesDescription: 'Nos domaines d\'expertise',
+        needHelp: 'Besoin d\'aide ?',
+        needHelpDescription: 'Notre équipe est à votre disposition pour vous accompagner dans tous vos projets électriques. N\'hésitez pas à nous contacter pour un devis gratuit et personnalisé.',
+        requestQuote: 'Demander un devis',
+        contactUs: 'Nous contacter',
+        footerNote: 'Vous pouvez également accéder à nos réseaux sociaux et à notre newsletter depuis le pied de page.',
+        madeWithLove: 'Fait avec amour au Maroc',
+        pages: {
+          home: { name: 'Accueil', description: 'Page d\'accueil avec présentation de nos services' },
+          about: { name: 'À propos', description: 'Découvrez notre histoire et notre expertise' },
+          services: { name: 'Services', description: 'Nos solutions électriques professionnelles' },
+          projects: { name: 'Réalisations', description: 'Découvrez nos projets réalisés' },
+          contact: { name: 'Contact', description: 'Contactez-nous pour un devis gratuit' },
+          legal: { name: 'Mentions légales', description: 'Informations légales et conditions d\'utilisation' },
+          sitemap: { name: 'Plan du site', description: 'Navigation complète du site (page actuelle)' },
+          installation: { name: 'Installation Électrique', description: 'Installation complète pour résidentiel et commercial' },
+          maintenance: { name: 'Maintenance', description: 'Services de maintenance préventive et dépannage' },
+          material: { name: 'Matériel Électrique', description: 'Vente et distribution de matériel professionnel' },
+          emergency: { name: 'Service d\'Urgence', description: 'Intervention rapide 24h/7j' },
+        }
       },
       footer: {
         company: {
@@ -331,7 +373,7 @@ const resources = {
       contact: {
         title: 'Contactez-nous',
         subtitle:
-          "Besoin d'un devis, d'un conseil ou d'une intervention ? Notre équipe est à votre disposition.",
+          "Notre équipe est à votre disposition pour répondre à toutes vos questions",
         cards: {
           0: {
             title: 'Adresse',
@@ -470,9 +512,9 @@ const resources = {
           call: 'Call Now',
         },
         hero: {
-          title: 'Your Expert in <1>Electricity</1> in Mohammedia',
+          title: 'Professional Electrical Solutions',
           subtitle:
-            'LIGHT BULB supports you in all your electrical projects: equipment sales, installation, maintenance, and troubleshooting.',
+            'For Residences and Businesses: security, innovation and expertise at your service',
           quote: 'Request a Quote',
           services: 'Our Services',
         },
@@ -482,7 +524,7 @@ const resources = {
           title: 'About',
           company: 'LIGHT BULB',
           description:
-            'Your trusted partner for all your electrical needs in Mohammedia and the Casablanca region.',
+            'Your trusted electrical partner in Morocco for over 20 years',
         },
         companyStory: {
           title: 'Our Story',
@@ -492,6 +534,13 @@ const resources = {
             'Our qualified experts use their expertise to serve individuals, companies and communities in the region. We combine Moroccan artisan tradition and modern technology to offer durable and reliable electrical solutions.',
           paragraph3:
             'Located in the heart of Mohammedia, we perfectly understand local specifics and the needs of our clientele. This proximity allows us to offer a personalized and reactive service.',
+          description: {
+            part1: "Light Bulb",
+            part2: "is your trusted electrical partner in Morocco, based in Mohammedia and active throughout Morocco. More than 20 years of experience serving individuals and professionals."
+          },
+          values: {
+            description: "Family-run business driven by the passion for electricity and the sense of service."
+          },
           stats: {
             years: 'Years of Experience',
             projects: 'Completed Projects',
@@ -561,7 +610,7 @@ const resources = {
         title: 'Our Services',
         title_highlight: 'Services',
         description:
-          'From electrical equipment sales to installation and maintenance, LIGHT BULB accompanies you in all your electrical projects.',
+          'Complete electrical solutions for all your professional and residential needs',
         request_quote: 'Request a Quote',
         professional_service: 'Professional Service',
         professional_service_description:
@@ -586,7 +635,7 @@ const resources = {
         our_realizations: 'Our Projects',
         our_realizations_highlight: 'Projects',
         discover_some_of_our_recent_projects:
-          'Discover some of our recent projects',
+          'Discover our electrical projects completed with excellence and professionalism',
         demonstrate_our_expertise: 'that demonstrate our expertise',
         and_the_quality_of_our_electrical_installations:
           'and the quality of our electrical installations.',
@@ -656,6 +705,41 @@ const resources = {
         contact_courrier_value:
           'By mail: Hassania 2, Bloc B N°248, Bd Mohamed VI, Mohammedia, Morocco',
         derniere_mise_a_jour_value: 'Last update: {date}',
+        legal_documents_title: 'Legal Documents',
+        useful_links_title: 'Useful Links',
+        site_map_link: 'Site Map',
+        contact_link: 'Contact Us',
+        legal_info_subtitle: 'Legal information and terms of use of the LIGHT BULB website',
+      },
+      planSite: {
+        title: 'Site Map',
+        subtitle: 'Find here all the main pages and sections of the LIGHT BULB site for easy and optimal navigation.',
+        quickAccess: 'Quick Access',
+        mainPages: 'Main Pages',
+        mainPagesDescription: 'Main site navigation',
+        legalInfo: 'Legal Information',
+        legalInfoDescription: 'Documents and legal notices',
+        specializedServices: 'Specialized Services',
+        specializedServicesDescription: 'Our areas of expertise',
+        needHelp: 'Need Help?',
+        needHelpDescription: 'Our team is at your disposal to assist you in all your electrical projects. Do not hesitate to contact us for a free and personalized quote.',
+        requestQuote: 'Request a Quote',
+        contactUs: 'Contact Us',
+        footerNote: 'You can also access our social networks and newsletter from the footer.',
+        madeWithLove: 'Made with love in Morocco',
+        pages: {
+          home: { name: 'Home', description: 'Homepage with presentation of our services' },
+          about: { name: 'About', description: 'Discover our story and expertise' },
+          services: { name: 'Services', description: 'Our professional electrical solutions' },
+          projects: { name: 'Projects', description: 'Discover our completed projects' },
+          contact: { name: 'Contact', description: 'Contact us for a free quote' },
+          legal: { name: 'Legal Notice', description: 'Legal information and terms of use' },
+          sitemap: { name: 'Site Map', description: 'Complete site navigation (current page)' },
+          installation: { name: 'Electrical Installation', description: 'Complete installation for residential and commercial' },
+          maintenance: { name: 'Maintenance', description: 'Preventive maintenance and troubleshooting services' },
+          material: { name: 'Electrical Equipment', description: 'Sale and distribution of professional equipment' },
+          emergency: { name: 'Emergency Service', description: 'Rapid intervention 24/7' },
+        }
       },
       footer: {
         company: {
@@ -701,7 +785,7 @@ const resources = {
       contact: {
         title: 'Contact Us',
         subtitle:
-          'Need a quote, advice, or intervention? Our team is at your service.',
+          'Our team is at your disposal to answer all your questions',
         cards: {
           0: {
             title: 'Address',
@@ -835,9 +919,9 @@ const resources = {
           call: 'اتصل الآن',
         },
         hero: {
-          title: 'خبيرك في <1>الكهرباء</1> في المحمدية',
+          title: 'حلول كهربائية مهنية',
           subtitle:
-            'LIGHT BULB يرافقك في جميع مشاريعك الكهربائية: بيع المعدات، التركيب، الصيانة، وخدمة الطوارئ.',
+            'للمنازل والشركات: الأمان والابتكار والخبرة في خدمتك',
           quote: 'طلب عرض سعر',
           services: 'خدماتنا',
         },
@@ -847,7 +931,7 @@ const resources = {
           title: 'من نحن',
           company: 'لايت بولب',
           description:
-            'شريكك الموثوق لجميع احتياجاتك الكهربائية في المحمدية ومنطقة الدار البيضاء.',
+            'شريكك الكهربائي الموثوق في المغرب منذ أكثر من 20 عامًا',
         },
         companyStory: {
           title: 'قصتنا',
@@ -857,6 +941,13 @@ const resources = {
             'فريق خبرائنا المؤهلين يستخدمون مهاراتهم لخدمة الأفراد، الشركات والمجتمعات في المنطقة. نجمع تراثنا المغربي الأصيل والتقنيات الحديثة لتقديم حلول كهربائية دائمة وموثوقة.',
           paragraph3:
             'موجودون في قلب المحمدية، نعرف بالضبط التفاصيل المحلية واحتياجات عملائنا. هذه التوافر يسمح لنا بتقديم خدمة مخصصة ومتفائلة.',
+          description: {
+            part1: "لايت بولب",
+            part2: "هو شريكك الكهربائي الموثوق في المغرب، مقره في المحمدية ويعمل في جميع أنحاء المغرب. أكثر من 20 عامًا من الخبرة في خدمة الأفراد والمهنيين."
+          },
+          values: {
+            description: "شركة منزلية تشغلها عائلة متحمسة للكهرباء وإحساس بالخدمة."
+          },
           stats: {
             years: 'سنوات الخبرة',
             projects: 'المشاريع المكتملة',
@@ -878,7 +969,7 @@ const resources = {
           {
             title: 'الثقة',
             description:
-              'عملائنا يؤمنون بنا لمشاريعهم الأكثر أهمية منذ أكثر من 10 سنوات.',
+              'عملائنا يؤمنون بنا لمشاريعهم الأكثر أهمية منذ أكثر من 20 عامًا.',
           },
           {
             title: 'التفائل',
@@ -926,7 +1017,7 @@ const resources = {
         title: 'خدماتنا',
         title_highlight: 'خدمات',
         description:
-          'من بيع معدات كهربائية إلى أعمال التركيب والصيانة، يصاحبك LIGHT BULB في جميع مشاريعك الكهربائية.',
+          'حلول كهربائية كاملة لجميع احتياجاتك المهنية والسكنية',
         request_quote: 'طلب عرض سعر',
         professional_service: 'خدمة مهنية',
         professional_service_description:
@@ -949,7 +1040,7 @@ const resources = {
         our_realizations: 'مشاريعنا',
         our_realizations_highlight: 'الإنجازات',
         discover_some_of_our_recent_projects:
-          'اكتشف بعض مشاريعنا الأخيرة التي تظهر خبرتنا وجودة التركيبات الكهربائية لدينا.',
+          'اكتشف مشاريعنا الكهربائية المنجزة بالتميز والمهنية',
         demonstrate_our_expertise: 'التي تظهر خبرتنا',
         and_the_quality_of_our_electrical_installations:
           'وجودة التركيبات الكهربائية لدينا.',
@@ -1027,6 +1118,41 @@ const resources = {
         contact_courrier_value:
           'بالبريد: حسنية 2، بلوك ب رقم 248، شارع محمد السادس، المحمدية، مغرب',
         derniere_mise_a_jour_value: 'آخر تحديث: {date}',
+        legal_documents_title: 'المستندات القانونية',
+        useful_links_title: 'روابط مفيدة',
+        site_map_link: 'خريطة الموقع',
+        contact_link: 'اتصل بنا',
+        legal_info_subtitle: 'المعلومات القانونية وشروط استخدام موقع لايت بولب',
+      },
+      planSite: {
+        title: 'خريطة الموقع',
+        subtitle: 'اعثر هنا على جميع الصفحات والأقسام الرئيسية لموقع لايت بولب للتنقل السهل والمثالي.',
+        quickAccess: 'الوصول السريع',
+        mainPages: 'الصفحات الرئيسية',
+        mainPagesDescription: 'التنقل الرئيسي للموقع',
+        legalInfo: 'المعلومات القانونية',
+        legalInfoDescription: 'المستندات والإشعارات القانونية',
+        specializedServices: 'الخدمات المتخصصة',
+        specializedServicesDescription: 'مجالات خبرتنا',
+        needHelp: 'تحتاج مساعدة؟',
+        needHelpDescription: 'فريقنا في خدمتك لمساعدتك في جميع مشاريعك الكهربائية. لا تتردد في الاتصال بنا للحصول على عرض سعر مجاني ومخصص.',
+        requestQuote: 'طلب عرض سعر',
+        contactUs: 'اتصل بنا',
+        footerNote: 'يمكنك أيضًا الوصول إلى شبكاتنا الاجتماعية والنشرة الإخبارية من التذييل.',
+        madeWithLove: 'صنع بحب في المغرب',
+        pages: {
+          home: { name: 'الرئيسية', description: 'الصفحة الرئيسية مع عرض خدماتنا' },
+          about: { name: 'من نحن', description: 'اكتشف قصتنا وخبرتنا' },
+          services: { name: 'الخدمات', description: 'حلولنا الكهربائية المهنية' },
+          projects: { name: 'المشاريع', description: 'اكتشف مشاريعنا المنجزة' },
+          contact: { name: 'اتصل بنا', description: 'اتصل بنا للحصول على عرض سعر مجاني' },
+          legal: { name: 'الإشعارات القانونية', description: 'المعلومات القانونية وشروط الاستخدام' },
+          sitemap: { name: 'خريطة الموقع', description: 'التنقل الكامل للموقع (الصفحة الحالية)' },
+          installation: { name: 'التركيب الكهربائي', description: 'تركيب كامل للسكني والتجاري' },
+          maintenance: { name: 'الصيانة', description: 'خدمات الصيانة الوقائية والإصلاح' },
+          material: { name: 'المعدات الكهربائية', description: 'بيع وتوزيع المعدات المهنية' },
+          emergency: { name: 'خدمة الطوارئ', description: 'تدخل سريع 24/7' },
+        }
       },
       footer: {
         company: {
@@ -1070,7 +1196,7 @@ const resources = {
       },
       contact: {
         title: 'اتصل بنا',
-        subtitle: 'هل تحتاج إلى عرض سعر أو استشارة أو تدخل؟ فريقنا في خدمتك.',
+        subtitle: 'فريقنا في خدمتك للإجابة على جميع أسئلتك',
         cards: {
           0: {
             title: 'العنوان',
@@ -1079,8 +1205,8 @@ const resources = {
           },
           1: {
             title: 'الهاتف',
-            line1: '+212 523 XXX XXX',
-            line2: '+212 6XX XXX XXX',
+            line1: '+212 523 31 08 21',
+            line2: '+212 661 06 74 91',
           },
           2: {
             title: 'البريد الإلكتروني',

@@ -289,31 +289,31 @@ Je souhaite recevoir un devis personnalisé.`;
           {/* Main Heading */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
-              Contactez
+              {t('contact.title')}
             </span>
             <br />
             <span className="text-white drop-shadow-2xl font-black">
-              Nous
+              {t('contact.subtitle')}
             </span>
           </h1>
           
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-6xl mx-auto mb-8 leading-relaxed animate-fade-in-up font-medium px-4" style={{ animationDelay: '0.4s' }}>
             <span className="bg-black/40 backdrop-blur-sm px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-2xl leading-relaxed">
-              Notre équipe est à votre disposition pour répondre à toutes vos questions
+              {t('contact.subtitle')}
             </span>
           </p>
           
           {/* Contact Methods Preview */}
           <div className="flex items-center gap-8 mb-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Téléphone</div>
-              <div className="text-sm md:text-base text-white/80">+212 661 067 491</div>
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('contact.cards.1.title')}</div>
+              <div className="text-sm md:text-base text-white/80">{t('contact.cards.1.line1')}</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-400">Email</div>
-              <div className="text-sm md:text-base text-white/80">contact@lightbulb.ma</div>
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('contact.cards.2.title')}</div>
+              <div className="text-sm md:text-base text-white/80">{t('contact.cards.2.line1')}</div>
             </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
@@ -328,14 +328,14 @@ Je souhaite recevoir un devis personnalisé.`;
               to="/contact#devis"
               className="group bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Demander un devis</span>
+              <span>{t('contact.form.request_quote')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
             <Link
               to="/services#services"
               className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl border-2 border-white/30 hover:border-white/50 shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 flex items-center gap-3 text-lg"
             >
-              <span>Nos services</span>
+              <span>{t('services.title')}</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
