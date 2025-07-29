@@ -11,6 +11,8 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
+import FAQSection from '../components/FAQSection';
+import Meta from '../components/Meta';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -203,7 +205,13 @@ Je souhaite recevoir un devis personnalisé.`;
   }, [location.hash]);
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen bg-yellow-50">
+      <Meta
+        title="Contact & Devis LIGHT BULB - Demandez votre devis électrique"
+        description="Contactez LIGHT BULB pour toute demande de devis, d’information ou d’assistance. Réponse rapide, conseils personnalisés, service WhatsApp."
+        image="/LogoLb.png"
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+      />
       {/* Hero Section */}
       <section className="w-full h-[70vh] min-h-[600px] bg-cover bg-center relative flex items-center justify-center transition-all duration-700 overflow-hidden">
         {/* Simple Crossfade Background Images */}
@@ -373,9 +381,9 @@ Je souhaite recevoir un devis personnalisé.`;
                 <div className={`flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${info.color} rounded-full text-white mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                   {info.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
                   {info.title}
-                </h3>
+                </h2>
                 <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
                   {info.value}
                 </p>

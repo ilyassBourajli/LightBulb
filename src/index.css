@@ -708,8 +708,8 @@ html {
 @media (max-width: 640px) {
   .carousel-control {
     @apply p-2;
-  }
-  
+}
+
   .carousel-control svg {
     @apply w-5 h-5;
   }

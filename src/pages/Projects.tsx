@@ -13,6 +13,7 @@ import {
   DollarSign,
   Star,
 } from 'lucide-react';
+import Meta from '../components/Meta';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -159,11 +160,11 @@ const Projects = () => {
 
   const triggerFade = useCallback(
     (nextIndex: number) => {
-      setFade(false);
-      setTimeout(() => {
-        setPrevIndex(heroIndex);
-        setHeroIndex(nextIndex);
-        setFade(true);
+    setFade(false);
+    setTimeout(() => {
+      setPrevIndex(heroIndex);
+      setHeroIndex(nextIndex);
+      setFade(true);
       }, 250); // Réduit à 250ms pour une transition plus rapide
     },
     [heroIndex]
@@ -244,6 +245,12 @@ const Projects = () => {
 
   return (
     <div className="w-full">
+      <Meta
+        title="Réalisations LIGHT BULB - Projets électriques au Maroc"
+        description="Découvrez nos réalisations : installations électriques résidentielles, commerciales et industrielles partout au Maroc. Qualité, sécurité et satisfaction garantie."
+        image="/LogoLb.png"
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+      />
       {/* Hero Section */}
       <section className="w-full h-[70vh] min-h-[600px] bg-cover bg-center relative flex items-center justify-center transition-all duration-700 overflow-hidden">
         {/* Simple Crossfade Background Images */}
@@ -354,7 +361,7 @@ const Projects = () => {
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('projects.commercial')}</div>
               <div className="text-sm md:text-base text-white/80">Bureaux & Magasins</div>
-            </div>
+              </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">{t('projects.industrial')}</div>
@@ -439,9 +446,9 @@ const Projects = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">
                     {project.title}
-                  </h3>
+                  </h2>
                   
                   <p className="text-sm sm:text-base text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300">
                     {project.description}
@@ -467,7 +474,7 @@ const Projects = () => {
                       <span>{project.client}</span>
                     </div>
                     
-                    <div className="inline-flex items-center text-sm text-yellow-600 hover:text-yellow-700 font-semibold transition-colors duration-300 group-hover:translate-x-2">
+                    <div className="inline-flex items-center text-sm text-yellow-800 hover:text-yellow-700 font-semibold transition-colors duration-300 group-hover:translate-x-2">
                       {t('projects.see_details')}
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
@@ -511,7 +518,7 @@ const Projects = () => {
             </div>
             
             {/* Modal Body */}
-            <div className="p-6">
+              <div className="p-6">
               {/* Project Image */}
               <div className="w-full h-64 sm:h-80 bg-gray-200 rounded-xl overflow-hidden mb-6">
                 <img
@@ -562,7 +569,7 @@ const Projects = () => {
               
               {/* Description */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">{t('projects.project_description')}</h3>
+                <h2 className="text-lg font-bold text-gray-800 mb-3">{t('projects.project_description')}</h2>
                 <p className="text-gray-600 leading-relaxed">
                   {selectedProject.description}
                 </p>
@@ -570,24 +577,24 @@ const Projects = () => {
               
               {/* Features */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">{t('projects.technical_features')}</h3>
+                <h2 className="text-lg font-bold text-gray-800 mb-4">{t('projects.technical_features')}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {selectedProject.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
                       <CheckCircle className="w-5 h-5 text-yellow-500 flex-shrink-0" />
                       <span className="text-gray-700 font-medium">{feature}</span>
                     </div>
-                  ))}
-                </div>
+          ))}
+        </div>
               </div>
               
               {/* Challenges & Solutions */}
               {selectedProject.challenges && selectedProject.solutions && (
                 <div className="mb-8">
-                  <h3 className="text-lg font-bold text-gray-800 mb-4">{t('projects.challenges_and_solutions')}</h3>
+                  <h2 className="text-lg font-bold text-gray-800 mb-4">{t('projects.challenges_and_solutions')}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-red-600 mb-3">{t('projects.challenges_encountered')}</h4>
+                      <h3 className="font-semibold text-red-600 mb-3">{t('projects.challenges_encountered')}</h3>
                       <ul className="space-y-2">
                         {selectedProject.challenges.map((challenge, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-gray-600">
@@ -598,7 +605,7 @@ const Projects = () => {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-green-600 mb-3">{t('projects.applied_solutions')}</h4>
+                      <h3 className="font-semibold text-green-600 mb-3">{t('projects.applied_solutions')}</h3>
                       <ul className="space-y-2">
                         {selectedProject.solutions.map((solution, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-gray-600">
@@ -615,11 +622,11 @@ const Projects = () => {
               {/* Testimonial */}
               {selectedProject.testimonials && (
                 <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border-l-4 border-yellow-400">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">{t('projects.client_testimonial')}</h3>
+                  <h2 className="text-lg font-bold text-gray-800 mb-3">{t('projects.client_testimonial')}</h2>
                   <blockquote className="text-gray-700 italic">
                     "{selectedProject.testimonials}"
                   </blockquote>
-                </div>
+          </div>
               )}
               
               {/* CTA */}
@@ -638,8 +645,8 @@ const Projects = () => {
                 >
                   {t('projects.close')}
                 </button>
-              </div>
-            </div>
+          </div>
+          </div>
           </div>
         </div>
       )}

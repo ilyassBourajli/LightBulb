@@ -11,6 +11,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import Meta from '../components/Meta';
 
 const About = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -32,11 +33,11 @@ const About = () => {
 
   const triggerFade = useCallback(
     (nextIndex: number) => {
-      setFade(false);
-      setTimeout(() => {
-        setPrevIndex(heroIndex);
-        setHeroIndex(nextIndex);
-        setFade(true);
+    setFade(false);
+    setTimeout(() => {
+      setPrevIndex(heroIndex);
+      setHeroIndex(nextIndex);
+      setFade(true);
       }, 250);
     },
     [heroIndex]
@@ -109,6 +110,12 @@ const About = () => {
 
   return (
     <div className="w-full">
+      <Meta
+        title="À propos de LIGHT BULB - Votre partenaire électricité au Maroc"
+        description="Découvrez l’histoire, la mission et les valeurs de LIGHT BULB. Plus de 20 ans d’expertise en matériel électrique à Mohammedia et dans tout le Maroc."
+        image="/LogoLb.png"
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+      />
       {/* Hero Section */}
       <section className="w-full h-[70vh] min-h-[600px] bg-cover bg-center relative flex items-center justify-center transition-all duration-700 overflow-hidden">
         <div
@@ -118,8 +125,8 @@ const About = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-          aria-hidden="true"
-        />
+            aria-hidden="true"
+          />
         
         {/* Enhanced Overlay with Gradient */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-black/70 pointer-events-none" aria-hidden="true"></div>
@@ -167,7 +174,7 @@ const About = () => {
               alt="Light Bulb Name Logo"
               className="h-14 w-auto object-contain drop-shadow-2xl"
             />
-          </div>
+        </div>
           
           {/* Main Heading */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
@@ -197,7 +204,7 @@ const About = () => {
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">Tout</div>
               <div className="text-sm md:text-base text-white/80">Le Maroc</div>
-            </div>
+              </div>
             <div className="w-px h-8 bg-white/30"></div>
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-yellow-400">100%</div>
@@ -227,7 +234,7 @@ const About = () => {
         {/* Carousel Dots - Moved outside main content */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 flex space-x-1 pointer-events-none">
           {heroImages.map((_, index) => (
-            <button
+              <button
               key={index}
               onClick={() => triggerFade(index)}
               className={`carousel-dot pointer-events-auto w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 focus-ring ${
@@ -236,8 +243,8 @@ const About = () => {
                   : 'bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Aller à l'image ${index + 1}`}
-            />
-          ))}
+              />
+            ))}
         </div>
       </section>
 
@@ -275,7 +282,7 @@ const About = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <Award className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Excellence</h3>
+                <h2 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Excellence</h2>
                 <p className="text-gray-600 text-sm group-hover:text-gray-700 transition-colors duration-300">
                   {t('about.missionValues.excellence.description')}
                 </p>
@@ -287,8 +294,8 @@ const About = () => {
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <Shield className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Confiance</h3>
+          </div>
+                <h2 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Confiance</h2>
                 <p className="text-gray-600 text-sm group-hover:text-gray-700 transition-colors duration-300">
                   {t('about.missionValues.confidence.description')}
                 </p>
@@ -301,7 +308,7 @@ const About = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <Clock className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Réactivité</h3>
+                <h2 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Réactivité</h2>
                 <p className="text-gray-600 text-sm group-hover:text-gray-700 transition-colors duration-300">
                   {t('about.missionValues.responsiveness.description')}
                 </p>
@@ -313,8 +320,8 @@ const About = () => {
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-2xl text-white mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                   <Target className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Précision</h3>
+              </div>
+                <h2 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-yellow-600 transition-colors duration-300">Précision</h2>
                 <p className="text-gray-600 text-sm group-hover:text-gray-700 transition-colors duration-300">
                   {t('about.missionValues.precision.description')}
                 </p>
@@ -350,7 +357,7 @@ const About = () => {
             <div className="flex items-start space-x-3 group hover:translate-x-2 transition-all duration-300">
               <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                 <div className="w-3 h-3 bg-white rounded-full"></div>
-              </div>
+        </div>
               <p className="text-lg text-gray-700 group-hover:text-gray-800 transition-colors duration-300">
                 {t('about.whyChooseUs.fastDelivery.description')}
               </p>
@@ -358,7 +365,7 @@ const About = () => {
             <div className="flex items-start space-x-3 group hover:translate-x-2 transition-all duration-300">
               <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                 <div className="w-3 h-3 bg-white rounded-full"></div>
-              </div>
+        </div>
               <p className="text-lg text-gray-700 group-hover:text-gray-800 transition-colors duration-300">
                 {t('about.whyChooseUs.customizedSolutions.description')}
               </p>
@@ -384,7 +391,7 @@ const About = () => {
               </p>
             </div>
           </div>
-        </div>
+                </div>
       </section>
 
       {/* Contactez-nous */}
@@ -429,7 +436,7 @@ const About = () => {
               <MapPin className="w-5 h-5 text-yellow-500 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300" />
               <span className="text-sm font-semibold">{t('contact.address')}</span>
             </a>
-          </div>
+            </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

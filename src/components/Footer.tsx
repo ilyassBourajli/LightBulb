@@ -40,13 +40,13 @@ const Footer = () => {
             <p className="text-gray-600 text-center lg:text-left leading-relaxed max-w-sm">
               Découvrez l'innovation et laissez-vous inspirer par nos solutions
               créatives qui
-              <span className="font-semibold text-yellow-600">
+              <span className="font-semibold text-yellow-800">
                 {' '}
                 transforment les idées en réalité
               </span>
               .
             </p>
-            <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-yellow-600">
+            <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-yellow-800">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               #Améliorons les vies
             </div>
@@ -70,14 +70,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="#faq"
+                <Link
+                  to="/faq"
                   className="text-gray-600 hover:text-yellow-600 transition-all duration-200 hover:translate-x-1 inline-block group"
                 >
                   <span className="border-b border-transparent group-hover:border-yellow-600 transition-colors duration-200">
                     FAQ - Questions fréquentes
                   </span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a

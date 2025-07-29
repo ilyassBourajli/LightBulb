@@ -203,16 +203,16 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
 
       {/* Mobile Menu */}
       <div className={`fixed inset-0 z-[9999] no-print ${isMenuOpen ? 'block' : 'hidden'}`} ref={menuRef}>
-        {/* Backdrop */}
-        <div
+          {/* Backdrop */}
+          <div
           className="absolute inset-0 bg-black/80 transition-opacity duration-500 backdrop-blur-lg"
-          onClick={() => setIsMenuOpen(false)}
-          aria-hidden="true"
-        />
+            onClick={() => setIsMenuOpen(false)}
+            aria-hidden="true"
+          />
 
-        {/* Menu Panel */}
+          {/* Menu Panel */}
         <div className={`mobile-menu overflow-y-auto bg-gradient-to-br from-white via-yellow-50 to-white flex flex-col max-h-screen ${isMenuOpen ? 'open' : ''}`}>
-          {/* Header */}
+            {/* Header */}
           <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 md:pt-10 pb-4 sm:pb-6 border-b-2 border-yellow-200/50 flex-shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
               <img
@@ -226,35 +226,35 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
                 className="h-6 sm:h-8 w-auto object-contain"
               />
             </div>
-            <button
-              onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => setIsMenuOpen(false)}
               className="p-2 sm:p-3 rounded-full text-gray-700 hover:text-yellow-600 bg-yellow-100 hover:bg-yellow-200 transition-all duration-300 focus-ring hover:scale-110 shadow-lg"
               aria-label="Fermer le menu"
-            >
+              >
               <X size={20} className="sm:w-6 sm:h-6" />
-            </button>
-          </div>
+              </button>
+            </div>
 
-          {/* Navigation */}
+            {/* Navigation */}
           <nav className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 md:space-y-6 w-full max-w-sm mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 flex-1 overflow-y-auto">
-            {navigation.map((item, index) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsMenuOpen(false)}
+              {navigation.map((item, index) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setIsMenuOpen(false)}
                 className={`mobile-menu-link w-full text-center py-3 sm:py-4 px-4 sm:px-6 rounded-2xl font-semibold text-base sm:text-lg md:text-xl transform hover:scale-105 focus-ring transition-all duration-300 shadow-lg hover:shadow-xl ${
-                  isActive(item.href)
+                    isActive(item.href)
                     ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-white shadow-yellow-300/50'
                     : 'bg-white text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 border-2 border-transparent hover:border-yellow-300'
-                }`}
+                  }`}
                 style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
 
-          {/* Language Selector - Mobile */}
+            {/* Language Selector - Mobile */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4 justify-center py-6 sm:py-8 border-t-2 border-yellow-200/50 px-4 sm:px-6 md:px-8 flex-shrink-0">
             <div className="flex gap-1 sm:gap-2 md:gap-3">
               {languages.map((lang) => (

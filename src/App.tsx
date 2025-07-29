@@ -11,6 +11,7 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import PlanSite from './pages/PlanSite';
+import FAQ from './pages/FAQ';
 import WhatsAppButton from './components/WhatsAppButton';
 import './i18n';
 
@@ -74,6 +75,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/mentions-legales" element={<Legal />} />
               <Route path="/plan-du-site" element={<PlanSite />} />
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
           </Suspense>
         </main>

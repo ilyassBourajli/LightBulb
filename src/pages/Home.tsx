@@ -11,6 +11,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import Meta from '../components/Meta';
 
 const heroImages = [
   { src: '/acceuil 1.jpg', caption: 'Tableau électrique moderne' },
@@ -77,11 +78,11 @@ const Home = () => {
 
   const triggerFade = useCallback(
     (nextIndex: number) => {
-      setFade(false);
-      setTimeout(() => {
-        setPrevIndex(heroIndex);
-        setHeroIndex(nextIndex);
-        setFade(true);
+    setFade(false);
+    setTimeout(() => {
+      setPrevIndex(heroIndex);
+      setHeroIndex(nextIndex);
+      setFade(true);
       }, 250); // Réduit à 250ms pour une transition plus rapide
     },
     [heroIndex]
@@ -104,6 +105,12 @@ const Home = () => {
   // --- Render ---
   return (
     <div>
+      <Meta
+        title="LIGHT BULB - Solutions Électriques Professionnelles au Maroc"
+        description="Vente, installation et distribution de matériel électrique certifié. Plus de 20 ans d'expertise à Mohammedia et partout au Maroc. Devis gratuit, service rapide, conseils personnalisés."
+        image="/LogoLb.png"
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+      />
       {/* 1. Hero Section */}
       <section className="w-full h-[70vh] min-h-[600px] bg-cover bg-center relative flex items-center justify-center transition-all duration-700 overflow-hidden">
         {/* Simple Crossfade Background Images */}
@@ -273,7 +280,7 @@ const Home = () => {
                 <div className="absolute inset-0 rounded-full border-4 border-white opacity-80"></div>
                 <TrendingUp className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">20+</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">20+</h3>
               <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.1')}</p>
             </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
@@ -281,7 +288,7 @@ const Home = () => {
                 <div className="absolute inset-0 rounded-full border-4 border-white opacity-80"></div>
                 <Users className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">1000+</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">1000+</h3>
               <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.2')}</p>
             </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
@@ -289,17 +296,17 @@ const Home = () => {
                 <div className="absolute inset-0 rounded-full border-4 border-white opacity-80"></div>
                 <CheckCircle className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
               </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">500+</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">500+</h3>
               <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.0')}</p>
-            </div>
+          </div>
             <div className="stat-card border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-white rounded-3xl shadow-md hover:shadow-2xl hover:shadow-yellow-200/60 hover:border-yellow-500 transition-all duration-500 group hover:scale-105 hover:-translate-y-2">
               <div className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-yellow-400 rounded-full shadow-lg mb-4 relative group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                 <div className="absolute inset-0 rounded-full border-4 border-white opacity-80"></div>
                 <Zap className="w-7 h-7 sm:w-10 sm:h-10 text-white relative z-10" />
-              </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">24/7</h3>
+          </div>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">24/7</h3>
               <p className="text-base sm:text-lg text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{t('home.stats.3')}</p>
-            </div>
+          </div>
           </div>
         </div>
       </section>
@@ -313,9 +320,9 @@ const Home = () => {
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-500/90 font-medium max-w-2xl mx-auto">
               Des solutions électriques complètes pour tous vos besoins
-            </p>
-          </div>
-          
+          </p>
+        </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
             {services.map((service, index) => (
               <div
@@ -326,7 +333,7 @@ const Home = () => {
                   <span className="absolute inset-0 rounded-xl border-2 border-white opacity-70"></span>
                   <span className="relative z-10">{service.icon}</span>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 group-hover:text-yellow-600 transition-colors duration-300">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 group-hover:text-yellow-700 transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">
@@ -341,7 +348,7 @@ const Home = () => {
                 </Link>
               </div>
             ))}
-          </div>
+            </div>
         </div>
       </section>
 
@@ -349,10 +356,10 @@ const Home = () => {
       <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-white">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-            <div>
+              <div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
                 Pourquoi Choisir Light Bulb ?
-              </h2>
+                </h2>
               <div className="w-16 sm:w-24 h-1 bg-yellow-500 rounded mb-8"></div>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4 group hover:translate-x-2 transition-all duration-300">
@@ -360,7 +367,7 @@ const Home = () => {
                     <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">
                       Expertise Reconnue
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
@@ -373,20 +380,20 @@ const Home = () => {
                     <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">
                       Service Personnalisé
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
                       Conseils techniques adaptés à vos besoins spécifiques
-                    </p>
-                  </div>
+                </p>
+              </div>
                 </div>
                 <div className="flex items-start space-x-4 group hover:translate-x-2 transition-all duration-300">
                   <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                     <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-yellow-700 transition-colors duration-300">
                       Qualité Garantie
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
@@ -429,19 +436,19 @@ const Home = () => {
       <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-r from-yellow-500 to-yellow-600">
         <div className="w-full text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6">
-            Prêt à Démarrer Votre Projet ?
-          </h2>
+              Prêt à Démarrer Votre Projet ?
+            </h2>
           <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
             Contactez-nous dès aujourd'hui pour un devis gratuit et personnalisé
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <Link
+              <Link
               to="/contact#devis"
               className="btn-primary animate-fade-in-up flex items-center gap-2 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
             >
               Demander un devis
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
+              </Link>
             <Link
               to="/services#services"
               className="inline-flex items-center bg-transparent text-white border-2 border-white hover:bg-white hover:text-yellow-600 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:-translate-y-1"

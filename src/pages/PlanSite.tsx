@@ -15,6 +15,7 @@ import {
   Shield,
   Heart
 } from 'lucide-react';
+import Meta from '../components/Meta';
 
 const PlanSite = () => {
   const { t } = useTranslation();
@@ -59,7 +60,13 @@ const PlanSite = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Meta
+        title="Plan du site LIGHT BULB - Navigation et accès rapide"
+        description="Trouvez rapidement toutes les pages et services de LIGHT BULB grâce au plan du site. Navigation simplifiée et accès direct à l’information."
+        image="/LogoLb.png"
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+      />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -120,7 +127,7 @@ const PlanSite = () => {
                   <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
                     <Globe className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800">{section.title}</h3>
+                  <h2 className="text-2xl font-bold text-gray-800">{section.title}</h2>
                 </div>
                 <p className="text-gray-600 mb-6">{section.description}</p>
                 <div className="space-y-4">
@@ -134,9 +141,9 @@ const PlanSite = () => {
                         <link.icon className="w-4 h-4 text-yellow-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-gray-800 group-hover:text-yellow-600 transition-colors duration-300">
+                        <h3 className="font-semibold text-gray-800 group-hover:text-yellow-600 transition-colors duration-300">
                           {link.name}
-                        </h4>
+                        </h3>
                         <p className="text-sm text-gray-600 mt-1">
                           {link.description}
                         </p>
@@ -156,7 +163,7 @@ const PlanSite = () => {
           <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-8 text-white">
             <div className="flex items-center gap-4 mb-6">
               <Heart className="w-8 h-8" />
-              <h3 className="text-2xl font-bold">{t('planSite.needHelp')}</h3>
+              <h2 className="text-2xl font-bold">{t('planSite.needHelp')}</h2>
             </div>
             <p className="text-lg mb-6">
               {t('planSite.needHelpDescription')}
