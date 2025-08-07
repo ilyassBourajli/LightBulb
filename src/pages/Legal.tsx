@@ -274,7 +274,7 @@ const Legal = () => {
                   <Phone className="w-4 h-4 text-white" /> Par téléphone&nbsp;:
                 </span>
                 <div className="flex items-center gap-2">
-                  <a href={`tel:${t('legal.telephone_value').replace(/[^+\d]/g, '')}`} className="hover:underline text-white/90 font-mono focus:outline-none focus:ring-2 focus:ring-white rounded" tabIndex={0}>
+                  <a href={`tel:${t('legal.telephone_value').replace(/[^+\d]/g, '')}`} className="hover:underline text-white/90 font-mono focus:outline-none focus:ring-2 focus:ring-white rounded\" tabIndex={0}>
                     {t('legal.telephone_value')}
                   </a>
                   <button
