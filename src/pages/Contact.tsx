@@ -12,7 +12,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import FAQSection from '../components/FAQSection';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -206,9 +206,10 @@ Je souhaite recevoir un devis personnalisé.`;
 
   return (
     <div className="w-full min-h-screen bg-yellow-50">
-      <Meta
+      <SEOHelmet
         title="Contact & Devis LIGHT BULB - Demandez votre devis électrique"
         description="Contactez LIGHT BULB pour toute demande de devis, d’information ou d’assistance. Réponse rapide, conseils personnalisés, service WhatsApp."
+        keywords="contact Light Bulb, devis électrique gratuit, demande information, assistance électrique, WhatsApp électricien, Mohammedia contact"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

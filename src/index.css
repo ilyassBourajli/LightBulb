@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Lazy loading placeholder */
+img.lazy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img.lazy.loaded {
+  opacity: 1;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus management for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -23,6 +71,14 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  font-display: swap;
+}
+
+/* Improve text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* CLS Prevention - Fixed dimensions for common elements */
@@ -123,42 +179,50 @@ html {
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
   will-change: transform, opacity;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 .animate-fade-in-left {
   animation: fadeInLeft 0.8s ease-out forwards;
   will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-in-right {
   animation: fadeInRight 0.8s ease-out forwards;
   will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-scale-in {
   animation: scaleIn 0.8s ease-out forwards;
   will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-slide-in-bottom {
   animation: slideInFromBottom 0.8s ease-out forwards;
   will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
   will-change: box-shadow;
+  transform: translateZ(0);
 }
 
 /* Hover effects with reduced CLS */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .hover-lift:hover {
@@ -192,6 +256,8 @@ html {
   min-height: 48px;
   will-change: background-color, transform;
   color: #ffffff !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:focus {
@@ -219,6 +285,8 @@ html {
   min-height: 48px;
   will-change: background-color, transform;
   color: #1f2937 !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-secondary:focus {
@@ -231,6 +299,7 @@ html {
   @apply bg-white rounded-2xl shadow-lg transition-all duration-300;
   min-height: 200px;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .card-hover {
@@ -306,6 +375,7 @@ html {
 /* Professional transitions */
 .transition-professional {
   @apply transition-all duration-300 ease-out;
+  will-change: transform, opacity;
 }
 
 /* Focus ring for accessibility */
@@ -406,6 +476,7 @@ html {
 /* Interactive elements with improved accessibility */
 .interactive-element {
   @apply cursor-pointer transition-all duration-300;
+  transform: translateZ(0);
 }
 
 .interactive-element:hover {
@@ -426,6 +497,7 @@ html {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
+  transform: translateZ(0);
 }
 
 /* Screen reader only */
@@ -445,6 +517,7 @@ html {
 .image-professional {
   @apply object-cover object-center;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Button group */
@@ -463,6 +536,7 @@ html {
   min-height: 150px;
   will-change: transform, box-shadow;
   color: #1f2937;
+  transform: translateZ(0);
 }
 
 /* Testimonial card */
@@ -470,6 +544,7 @@ html {
   @apply bg-white rounded-2xl p-6 shadow-lg border-l-4 border-yellow-500;
   min-height: 200px;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 /* Navigation link with improved accessibility */
@@ -514,11 +589,13 @@ html {
   @apply bg-white rounded-2xl p-6 shadow-lg transition-all duration-300;
   min-height: 250px;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .service-card-icon {
   @apply w-16 h-16 bg-yellow-500 rounded-2xl text-white flex items-center justify-center mb-4;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 /* CTA section */
@@ -543,17 +620,20 @@ html {
   @apply bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300;
   min-height: 300px;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .project-card-image {
   @apply w-full h-48 object-cover;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Contact form */
 .contact-form {
   @apply bg-white rounded-2xl p-8 shadow-lg;
   min-height: 400px;
+  transform: translateZ(0);
 }
 
 /* Footer section */
@@ -570,6 +650,7 @@ html {
 .footer-social-link {
   @apply w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:text-yellow-400 hover:bg-gray-700 transition-all duration-300;
   will-change: background-color, color;
+  transform: translateZ(0);
 }
 
 /* Project modal styles */
@@ -659,6 +740,7 @@ html {
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateZ(0);
 }
 
 .carousel-control:hover {
@@ -682,6 +764,7 @@ html {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateZ(0);
 }
 
 .carousel-dot.active {
@@ -758,6 +841,7 @@ html {
 .whatsapp-button {
   @apply fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 z-40;
   will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .whatsapp-button:focus {
@@ -782,6 +866,7 @@ html {
 .backdrop-filter-professional {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
 }
 
 /* Responsive design with improved accessibility */
@@ -1009,10 +1094,12 @@ html {
 /* Animation performance improvements */
 .animate-smooth {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
 }
 
 .animate-smooth-slow {
   transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
 }
 
 /* Text rendering improvements */
@@ -1126,6 +1213,7 @@ html {
 
 .animate-fade-in {
   animation: fadeIn 1s ease-out;
+  transform: translateZ(0);
 }
 
 /* Enhanced loading animations */
@@ -1164,14 +1252,17 @@ html {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transform: translateZ(0);
 }
 
 .animate-spin {
   animation: spin 1s linear infinite;
+  transform: translateZ(0);
 }
 
 .animate-blob {
   animation: blob 7s infinite;
+  transform: translateZ(0);
 }
 
 .animation-delay-2000 {
@@ -1180,4 +1271,19 @@ html {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+/* Critical CSS for above-the-fold content */
+.hero-section {
+  contain: layout style paint;
+}
+
+.hero-content {
+  contain: layout style;
+}
+
+/* Optimize repaints */
+.carousel-container,
+.project-modal,
+.mobile-menu {
+  contain: layout style paint;
 }

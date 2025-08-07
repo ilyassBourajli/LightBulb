@@ -1,9 +1,15 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
+import ScrollToTop from './components/ScrollToTop';
+import CookieConsent from './components/CookieConsent';
+import ErrorBoundary from './components/ErrorBoundary';
+import PerformanceOptimizer from './components/PerformanceOptimizer';
+import Analytics from './components/Analytics';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -61,33 +67,40 @@ function App() {
   }
 
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen bg-white w-full">
-        <Header />
-        <main className="relative w-full">
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/a-propos" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/realisations" element={<Projects />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/mentions-legales" element={<Legal />} />
-              <Route path="/plan-du-site" element={<PlanSite />} />
-              <Route path="/faq" element={<FAQ />} />
-            </Routes>
-          </Suspense>
-        </main>
-        {/* WhatsApp Floating Button - visible on all pages */}
-          {/* WhatsApp Floating Button */}
-          <WhatsAppButton 
-           phoneNumber="+212661067491"
-           message="Bonjour ! Je suis intéressé(e) par vos services et j'aimerais en savoir plus."
-          />
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <PerformanceOptimizer />
+        <Analytics />
+        <Router>
+          <ScrollToTopComponent />
+          <div className="min-h-screen bg-white w-full">
+            <Header />
+            <main className="relative w-full">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/a-propos" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/realisations" element={<Projects />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/mentions-legales" element={<Legal />} />
+                  <Route path="/plan-du-site" element={<PlanSite />} />
+                  <Route path="/faq" element={<FAQ />} />
+                </Routes>
+              </Suspense>
+            </main>
+            {/* WhatsApp Floating Button - visible on all pages */}
+            <WhatsAppButton 
+             phoneNumber="+212661067491"
+             message="Bonjour ! Je suis intéressé(e) par vos services et j'aimerais en savoir plus."
+            />
+            <ScrollToTop />
+            <CookieConsent />
+            <Footer />
+          </div>
+        </Router>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

@@ -15,7 +15,7 @@ import {
   Shield,
   Heart
 } from 'lucide-react';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const PlanSite = () => {
   const { t } = useTranslation();
@@ -61,9 +61,10 @@ const PlanSite = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Meta
+      <SEOHelmet
         title="Plan du site LIGHT BULB - Navigation et accès rapide"
         description="Trouvez rapidement toutes les pages et services de LIGHT BULB grâce au plan du site. Navigation simplifiée et accès direct à l’information."
+        keywords="plan du site Light Bulb, navigation site web, accès rapide, pages services, sitemap électricien"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

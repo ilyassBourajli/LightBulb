@@ -14,6 +14,31 @@
     <meta name="keywords" content="électricité, matériel électrique, installation électrique, Maroc, dépannage, maintenance, électricien" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/LogoLb.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Light Bulb" />
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileImage" content="/LogoLb.png" />
+    <meta name="msapplication-TileColor" content="#f59e0b" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/LogoLb.png" as="image" />
+    <link rel="preload" href="/LogoAndName - Copy.png" as="image" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    
+    <!-- Accessibility -->
+    <meta name="color-scheme" content="light" />
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -24,7 +49,25 @@
     </script>
   </head>
   <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

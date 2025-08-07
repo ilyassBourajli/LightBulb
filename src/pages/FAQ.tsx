@@ -1,13 +1,14 @@
 import React from 'react';
 import FAQSection from '../components/FAQSection';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const FAQ: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Meta
+      <SEOHelmet
         title="FAQ LIGHT BULB - Questions fréquentes sur nos services et produits"
         description="Retrouvez toutes les réponses à vos questions sur LIGHT BULB, nos produits, services, commandes, livraisons, devis et support technique."
+        keywords="FAQ Light Bulb, questions fréquentes, aide électricité, support technique, commandes, livraisons, devis"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

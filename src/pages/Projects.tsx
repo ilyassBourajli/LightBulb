@@ -13,7 +13,7 @@ import {
   DollarSign,
   Star,
 } from 'lucide-react';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -245,9 +245,10 @@ const Projects = () => {
 
   return (
     <div className="w-full">
-      <Meta
+      <SEOHelmet
         title="Réalisations LIGHT BULB - Projets électriques au Maroc"
         description="Découvrez nos réalisations : installations électriques résidentielles, commerciales et industrielles partout au Maroc. Qualité, sécurité et satisfaction garantie."
+        keywords="réalisations électriques Maroc, projets électriques, installations résidentielles, installations commerciales, installations industrielles, portfolio électricien"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

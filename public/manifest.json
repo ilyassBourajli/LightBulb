@@ -1,0 +1,73 @@
+{
+  "name": "LIGHT BULB - Solutions Électriques Professionnelles",
+  "short_name": "Light Bulb",
+  "description": "Vente, installation et distribution de matériel électrique certifié au Maroc. Plus de 20 ans d'expertise.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait-primary",
+  "categories": ["business", "utilities"],
+  "lang": "fr",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/LogoLb.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/LogoLb.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/hero.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Demander un devis",
+      "short_name": "Devis",
+      "description": "Demander un devis gratuit",
+      "url": "/contact#devis",
+      "icons": [
+        {
+          "src": "/LogoLb.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Nos services",
+      "short_name": "Services",
+      "description": "Découvrir nos services",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/LogoLb.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Nous contacter",
+      "short_name": "Contact",
+      "description": "Nous contacter",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/LogoLb.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

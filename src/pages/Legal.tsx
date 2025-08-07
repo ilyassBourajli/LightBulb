@@ -21,7 +21,7 @@ import {
   Activity,
   AtSign
 } from 'lucide-react';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const Legal = () => {
   const { t } = useTranslation();
@@ -95,9 +95,10 @@ const Legal = () => {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-yellow-50 via-white to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Meta
+      <SEOHelmet
         title="Mentions légales LIGHT BULB - Informations légales et RGPD"
         description="Consultez les mentions légales de LIGHT BULB : identité, statut, propriété intellectuelle, protection des données, hébergement, responsabilité."
+        keywords="mentions légales Light Bulb, informations légales, RGPD, protection données, propriété intellectuelle, responsabilité"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

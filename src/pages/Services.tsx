@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const heroImages = [
   { src: '/hero.jpg', caption: 'Tableau électrique moderne' },
@@ -182,9 +182,10 @@ const Services = () => {
 
   return (
     <div>
-      <Meta
+      <SEOHelmet
         title="Services LIGHT BULB - Vente & Installation de Matériel Électrique"
         description="Découvrez tous les services LIGHT BULB : vente, installation, maintenance, conseils techniques et livraison rapide partout au Maroc."
+        keywords="services électriques Maroc, vente matériel électrique, installation électrique, maintenance électrique, dépannage urgence, conseils techniques"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

@@ -11,7 +11,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const heroImages = [
   { src: '/acceuil 1.jpg', caption: 'Tableau électrique moderne' },
@@ -105,9 +105,10 @@ const Home = () => {
   // --- Render ---
   return (
     <div>
-      <Meta
+      <SEOHelmet
         title="LIGHT BULB - Solutions Électriques Professionnelles au Maroc"
         description="Vente, installation et distribution de matériel électrique certifié. Plus de 20 ans d'expertise à Mohammedia et partout au Maroc. Devis gratuit, service rapide, conseils personnalisés."
+        keywords="électricité, matériel électrique, installation électrique, Maroc, dépannage, maintenance, électricien, Mohammedia, Casablanca, Rabat, Light Bulb"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

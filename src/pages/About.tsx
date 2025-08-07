@@ -11,7 +11,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import Meta from '../components/Meta';
+import SEOHelmet from '../components/SEOHelmet';
 
 const About = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -110,9 +110,10 @@ const About = () => {
 
   return (
     <div className="w-full">
-      <Meta
+      <SEOHelmet
         title="À propos de LIGHT BULB - Votre partenaire électricité au Maroc"
         description="Découvrez l’histoire, la mission et les valeurs de LIGHT BULB. Plus de 20 ans d’expertise en matériel électrique à Mohammedia et dans tout le Maroc."
+        keywords="à propos Light Bulb, histoire entreprise électrique, expertise électricité Maroc, Mohammedia électricien, valeurs entreprise"
         image="/LogoLb.png"
         url={typeof window !== 'undefined' ? window.location.href : ''}
       />

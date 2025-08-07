@@ -1,0 +1,49 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lightbulb.ma/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow important pages
+Allow: /
+Allow: /a-propos
+Allow: /services
+Allow: /realisations
+Allow: /contact
+Allow: /mentions-legales
+Allow: /plan-du-site
+Allow: /faq
+
+# Block common bot traps
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.cgi$
+Disallow: /*.pl$
+
+# Block search parameters
+Disallow: /*?
+Disallow: /*&
+
+# Block temporary files
+Disallow: /*.tmp
+Disallow: /*.temp
+Disallow: /*~
+
+# Allow CSS and JS files for proper rendering
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
